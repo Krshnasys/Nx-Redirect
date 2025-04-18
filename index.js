@@ -1,7 +1,6 @@
 const express = require("express");
 const app = express();
 
-// Home page
 app.get("/", (req, res) => {
   res.send(`
     <!DOCTYPE html>
@@ -18,20 +17,19 @@ app.get("/", (req, res) => {
           height: 100vh;
           margin: 0;
           font-family: 'Segoe UI', sans-serif;
-          background: linear-gradient(to right, #4a148c, #004d40);
+          background: #1b1f23;
           color: white;
           text-align: center;
         }
         h1 {
           font-size: 3em;
-          margin: 0;
         }
         p {
           font-size: 1.2em;
-          margin-top: 15px;
+          margin-top: 10px;
         }
         a {
-          color: #bbdefb;
+          color: #42a5f5;
           text-decoration: none;
         }
         a:hover {
@@ -49,7 +47,6 @@ app.get("/", (req, res) => {
   `);
 });
 
-// Redirect page
 app.get("/:bot/:token", (req, res) => {
   const { bot, token } = req.params;
   const tgURL = `https://t.me/${bot}?start=${token}`;
@@ -65,121 +62,121 @@ app.get("/:bot/:token", (req, res) => {
         body {
           margin: 0;
           padding: 0;
+          font-family: 'Segoe UI', sans-serif;
+          background: radial-gradient(circle at top left, #0088cc, #005f8d);
           height: 100vh;
           display: flex;
-          justify-content: center;
           align-items: center;
-          font-family: 'Segoe UI', sans-serif;
-          background: linear-gradient(135deg, #1d2b64, #f8cdda);
-          background-size: 400% 400%;
-          animation: gradientBG 10s ease infinite;
+          justify-content: center;
           overflow: hidden;
-        }
-
-        @keyframes gradientBG {
-          0% {background-position: 0% 50%;}
-          50% {background-position: 100% 50%;}
-          100% {background-position: 0% 50%;}
-        }
-
-        .glass-box {
-          background: rgba(255, 255, 255, 0.1);
-          border-radius: 15px;
-          padding: 40px;
+          color: white;
           text-align: center;
-          color: #fff;
-          box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-          backdrop-filter: blur(10px);
-          animation: fadeIn 1s ease;
+        }
+
+        .blob {
+          position: absolute;
+          width: 300px;
+          height: 300px;
+          background: rgba(255, 255, 255, 0.1);
+          border-radius: 50%;
+          animation: blobMove 10s infinite ease-in-out;
+        }
+
+        .blob:nth-child(1) { top: 10%; left: 20%; }
+        .blob:nth-child(2) { bottom: 10%; right: 15%; }
+
+        @keyframes blobMove {
+          0%, 100% { transform: translateY(0) scale(1); }
+          50% { transform: translateY(-20px) scale(1.1); }
+        }
+
+        .container {
+          position: relative;
+          z-index: 2;
+          background: rgba(0,0,0,0.3);
+          padding: 40px;
+          border-radius: 15px;
+          backdrop-filter: blur(12px);
+          box-shadow: 0 0 30px rgba(0,0,0,0.4);
+          animation: fadeIn 1s ease-out;
         }
 
         @keyframes fadeIn {
-          from {opacity: 0; transform: scale(0.95);}
-          to {opacity: 1; transform: scale(1);}
+          from { opacity: 0; transform: scale(0.95); }
+          to { opacity: 1; transform: scale(1); }
         }
 
-        .loader {
-          border: 5px solid rgba(255,255,255,0.3);
-          border-top: 5px solid white;
-          border-radius: 50%;
-          width: 50px;
-          height: 50px;
-          margin: 0 auto 20px;
-          animation: spin 1.5s linear infinite;
+        img.logo {
+          width: 80px;
+          margin-bottom: 20px;
+          animation: pulse 2s infinite ease-in-out;
         }
 
-        @keyframes spin {
-          0% { transform: rotate(0deg); }
-          100% { transform: rotate(360deg); }
+        @keyframes pulse {
+          0%, 100% { transform: scale(1); opacity: 1; }
+          50% { transform: scale(1.1); opacity: 0.8; }
         }
 
         h1 {
           font-size: 2em;
-          margin-bottom: 10px;
-        }
-
-        .emoji {
-          font-size: 1.3em;
+          margin: 0;
         }
 
         .countdown {
           font-size: 1.5em;
-          margin: 15px 0;
+          margin: 20px 0;
         }
 
-        .btn {
-          margin-top: 10px;
-          display: inline-block;
-          padding: 10px 20px;
+        .button {
+          padding: 12px 25px;
           font-size: 1em;
-          background-color: rgba(255,255,255,0.2);
+          color: #fff;
+          background-color: #0088cc;
           border: none;
           border-radius: 8px;
-          color: white;
           cursor: pointer;
+          text-decoration: none;
           transition: background 0.3s ease;
         }
 
-        .btn:hover {
-          background-color: rgba(255,255,255,0.4);
+        .button:hover {
+          background-color: #0070b8;
         }
       </style>
       <script>
-        let timeLeft = 3;
-        const countdownEl = () => document.getElementById('countdown');
-
-        function startCountdown() {
+        let time = 3;
+        function countdown() {
+          const el = document.getElementById('count');
           const interval = setInterval(() => {
-            timeLeft--;
-            if (countdownEl()) countdownEl().textContent = timeLeft;
-            if (timeLeft <= 0) {
+            time--;
+            if (el) el.textContent = time;
+            if (time === 0) {
               clearInterval(interval);
               window.location.href = '${tgURL}';
             }
           }, 1000);
         }
-
-        window.onload = startCountdown;
+        window.onload = countdown;
       </script>
     </head>
     <body>
-      <div class="glass-box">
-        <div class="loader"></div>
-        <h1>Redirecting you to <span class="emoji">➡️</span> ${bot} <span class="emoji">🚀</span></h1>
-        <p class="countdown">Redirecting in <span id="countdown">3</span> seconds...</p>
-        <button class="btn" onclick="window.location.href='${tgURL}'">Click here if not redirected</button>
+      <div class="blob"></div>
+      <div class="blob"></div>
+      <div class="container">
+        <img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram" />
+        <h1>Redirecting to <strong>${bot}</strong></h1>
+        <div class="countdown">In <span id="count">3</span> seconds...</div>
+        <a class="button" href="${tgURL}">Open in Telegram</a>
       </div>
     </body>
     </html>
   `);
 });
 
-// Invalid URL
 app.get("*", (req, res) => {
   res.status(400).send("Invalid URL format");
 });
 
-// Start server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log("Server running on port " + PORT);
