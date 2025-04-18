@@ -142,9 +142,9 @@ To add your own branding, update the following in `index.js`:
 
 [MIT License](LICENSE) – Free to use and modify.
 
-## Contact
+## Regards♥️
 
-- **GitHub**: [pompomxyz](https://github.com/Krshnasys)
+- **GitHub**: [Krshnasys](https://github.com/Krshnasys)
 - **Issues**: [Report Bugs](https://github.com/Krshnasys/Nx-Redirect/issues)
 
 ---
