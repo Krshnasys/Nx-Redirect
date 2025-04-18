@@ -5,9 +5,6 @@
 [![Telegram](https://img.shields.io/badge/Telegram-Join%20Now-0088CC?style=flat-square&logo=telegram)](https://t.me/NxLeech)
 
 **Nx-Leech Redirect** is a customizable and Heroku-deployable Redirect Web Page project designed for seamless redirection across various platforms including Telegram bots, URL shorteners, or any service where redirection is required. It includes a stylish homepage and a dedicated redirect page, giving users full control over their redirection flow.
-
-Whether you're managing a TG bot, creating short links redirection, or integrating redirection into any other service, this project allows you to deploy your own branded redirect page with ease. You can also connect a custom domain for a more professional and personalized experience.
-
 Every part of this project—from the design to the redirect logic—can be customized to fit your specific needs, allowing complete control over how your redirection looks and functions.
 
 [![Chrome](https://img.shields.io/badge/Live%20Demo-Open%20in%20Chrome-4285F4?style=flat-square&logo=google-chrome&logoColor=white)](https://nxredirect-428abc69e62a.herokuapp.com/)
