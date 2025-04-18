@@ -1,6 +1,4 @@
 # Nx-Leech Redirect
-
-![Nx-Leech Logo](assets/homepage.jpg)
 [![Heroku Deploy](https://img.shields.io/badge/Heroku-Deployed-430098?style=flat-square&logo=heroku)](https://nxredirect-428abc69e62a.herokuapp.com/)
 [![Node.js](https://img.shields.io/badge/Node.js-v18.20.8-green?style=flat-square&logo=node.js)](https://nodejs.org/)
 [![Express](https://img.shields.io/badge/Express-v4.18.2-blue?style=flat-square&logo=express)](https://expressjs.com/)
