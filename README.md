@@ -152,6 +152,8 @@ To add your own branding, update the following in `index.js`:
 
 [MIT License](LICENSE) – Free to use and modify.
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow?style=flat-square)](LICENSE)
+
 ## Regards♥️
 
 - **GitHub**: [Krshnasys](https://github.com/Krshnasys)
