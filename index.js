@@ -1,66 +1,94 @@
 const express = require("express");
 const app = express();
 
-const commonStyle = `
-    <style>
-        body { 
-            display: flex; 
-            flex-direction: column; 
-            align-items: center; 
-            justify-content: center; 
-            height: 100vh; 
-            margin: 0; 
-            text-align: center;
-            padding: 20px;
-            box-sizing: border-box;
-            font-family: sans-serif;
-        }
-        h1 { 
-            font-size: 6em; 
-            margin: 0; 
-        }
-        p { 
-            font-size: 2em; 
-            margin-top: 20px;
-        }
-        a {
-            text-decoration: none;
-            color: #007bff;
-        }
-        @media (max-width: 600px) {
-            h1 {
-                font-size: 3em;
-            }
-            p {
-                font-size: 1em;
-            }
-        }
-    </style>
-`;
-
+// Home page (main landing page)
 app.get("/", (req, res) => {
     res.send(`
-        <html>
+        <!DOCTYPE html>
+        <html lang="en">
         <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <title>Nx-Leech</title>
-            ${commonStyle}
+            <style>
+                body { 
+                    display: flex; 
+                    flex-direction: column; 
+                    align-items: center; 
+                    justify-content: center; 
+                    height: 100vh; 
+                    margin: 0; 
+                    text-align: center;
+                    padding: 20px;
+                    box-sizing: border-box;
+                }
+                h1 { 
+                    font-size: 6em; 
+                    margin: 0; 
+                }
+                p { 
+                    font-size: 2em; 
+                    margin-top: 20px;
+                }
+                @media (max-width: 600px) {
+                    h1 {
+                        font-size: 3em;
+                    }
+                    p {
+                        font-size: 1em;
+                    }
+                }
+            </style>
         </head>
         <body>
-            <h1>Welcome to Nx-Leech 🔧♨️</h1>
-            <p>Made with ❤️ by <a href='https://telegram.me/NxLeech'>@NxLeech</a></p>
+            <h1>Welcome to Nx-Leech ❤️🚀</h1>
+            <p>Made with ❤️ by <a href='https://telegram.me/NxLeech'>Nx-Leech</a></p>
         </body>
         </html>
     `);
 });
 
+// Dynamic page with bot and token
 app.get("/:bot/:token", (req, res) => {
     const { bot, token } = req.params;
     const tgURL = `https://t.me/${bot}?start=${token}`;
+
     res.send(`
-        <html>
+        <!DOCTYPE html>
+        <html lang="en">
         <head>
-            <title>Nx-Leech Redirecting</title>
-            ${commonStyle}
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Nx-Leech</title>
+            <style>
+                body { 
+                    display: flex; 
+                    flex-direction: column; 
+                    align-items: center; 
+                    justify-content: center; 
+                    height: 100vh; 
+                    margin: 0; 
+                    text-align: center;
+                    padding: 20px;
+                    box-sizing: border-box;
+                }
+                h1 { 
+                    font-size: 6em; 
+                    margin: 0; 
+                }
+                p { 
+                    font-size: 2em; 
+                    margin-top: 20px;
+                }
+                @media (max-width: 600px) {
+                    h1 {
+                        font-size: 3em;
+                    }
+                    p {
+                        font-size: 1em;
+                    }
+                }
+            </style>
             <script>
                 setTimeout(function() {
                     window.location.href = '${tgURL}';
@@ -68,16 +96,20 @@ app.get("/:bot/:token", (req, res) => {
             </script>
         </head>
         <body>
-            <h1>Welcome to Nx-Leech 🔧♨️</h1>
-            <p>Redirecting to <b>${bot}</b>...</p>
+            <h1>Welcome to Nx-Leech ❤️🚀</h1>
+            <p>Opening ${bot}...</p>
         </body>
         </html>
     `);
 });
 
+// Invalid URL handler
 app.get("*", (req, res) => {
     res.status(400).send("Invalid URL format");
 });
 
+// Start server
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+});
