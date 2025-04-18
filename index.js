@@ -6,8 +6,8 @@ app.get("/", (req, res) => {
         <html>
         <head><title>Jet-Mirror</title></head>
         <body style="text-align:center;padding-top:100px;">
-            <h1>Welcome to Jet-Mirror ❤️🚀</h1>
-            <p>Made with ❤️ by <a href='https://telegram.me/hrishikesh2861'>Lord Puneet 👑</a></p>
+            <h1>Welcome to Nx-Leech 🔧♨️</h1>
+            <p>Made with ❤️ by <a href='https://telegram.me/NxLeech'>NxLeech</a></p>
         </body>
         </html>
     `);
