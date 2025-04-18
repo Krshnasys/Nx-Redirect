@@ -1,4 +1,4 @@
-Apologies for the oversight! Since you haven’t changed the project structure yet and prefer to keep the focus on the main aspects without including the expanded structure in the `README.md`, I’ll provide a revised, concise `README.md` that reflects the **current project structure** (`index.js`, `Procfile`, `package.json`, `README.md`) and emphasizes the core elements: project purpose, setup, deployment, and customization instructions for replacing text, links, and credits. The `README.md` will retain the Telegram logo and Heroku deploy badge you liked, avoid mentioning the unapplied expanded structure, and stay professional, short, and GitHub-friendly. It will also align with the Nx-Leech Redirect project’s focus on a homepage with a particle background, floating GitHub icon, and Typed.js tagline, while keeping `index.js` unchanged.
+
 
 ---
 
