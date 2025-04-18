@@ -1,52 +1,69 @@
 const express = require("express");
 const app = express();
 
+// Home page (main landing page)
 app.get("/", (req, res) => {
   res.send(`
     <!DOCTYPE html>
     <html lang="en">
     <head>
-      <meta charset="UTF-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-      <title>Nx-Leech</title>
-      <style>
-        body {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          height: 100vh;
-          margin: 0;
-          font-family: 'Segoe UI', sans-serif;
-          background: #1b1f23;
-          color: white;
-          text-align: center;
-        }
-        h1 {
-          font-size: 3em;
-        }
-        p {
-          font-size: 1.2em;
-          margin-top: 10px;
-        }
-        a {
-          color: #42a5f5;
-          text-decoration: none;
-        }
-        a:hover {
-          text-decoration: underline;
-        }
-      </style>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <title>Nx-Leech</title>
+        <style>
+            body {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                height: 100vh;
+                margin: 0;
+                text-align: center;
+                padding: 20px;
+                box-sizing: border-box;
+                background: linear-gradient(to right, #4a148c, #004d40);
+                font-family: 'Arial', sans-serif;
+                color: white;
+            }
+
+            h1 {
+                font-size: 4em;
+                margin: 0;
+                text-shadow: 2px 2px 6px rgba(0,0,0,0.5);
+            }
+
+            p {
+                font-size: 1.5em;
+                margin-top: 20px;
+                font-style: italic;
+            }
+
+            a {
+                color: #bbdefb;
+                text-decoration: none;
+                transition: color 0.3s ease;
+            }
+
+            a:hover {
+                color: white;
+                text-decoration: underline;
+            }
+
+            @media (max-width: 600px) {
+                h1 { font-size: 2.5em; }
+                p { font-size: 1.2em; }
+            }
+        </style>
     </head>
     <body>
-      <div>
         <h1>Welcome to Nx-Leech ❤️🚀</h1>
-        <p>Made with ❤️ by <a href="https://t.me/NxLeech">Nx-Leech</a></p>
-      </div>
+        <p>Made with ❤️ by <a href='https://telegram.me/NxLeech'>Nx-Leech</a></p>
     </body>
     </html>
   `);
 });
 
+// Redirect page
 app.get("/:bot/:token", (req, res) => {
   const { bot, token } = req.params;
   const tgURL = `https://t.me/${bot}?start=${token}`;
@@ -55,129 +72,87 @@ app.get("/:bot/:token", (req, res) => {
     <!DOCTYPE html>
     <html lang="en">
     <head>
-      <meta charset="UTF-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-      <title>Redirecting...</title>
-      <style>
-        body {
-          margin: 0;
-          padding: 0;
-          font-family: 'Segoe UI', sans-serif;
-          background: radial-gradient(circle at top left, #0088cc, #005f8d);
-          height: 100vh;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          overflow: hidden;
-          color: white;
-          text-align: center;
-        }
-
-        .blob {
-          position: absolute;
-          width: 300px;
-          height: 300px;
-          background: rgba(255, 255, 255, 0.1);
-          border-radius: 50%;
-          animation: blobMove 10s infinite ease-in-out;
-        }
-
-        .blob:nth-child(1) { top: 10%; left: 20%; }
-        .blob:nth-child(2) { bottom: 10%; right: 15%; }
-
-        @keyframes blobMove {
-          0%, 100% { transform: translateY(0) scale(1); }
-          50% { transform: translateY(-20px) scale(1.1); }
-        }
-
-        .container {
-          position: relative;
-          z-index: 2;
-          background: rgba(0,0,0,0.3);
-          padding: 40px;
-          border-radius: 15px;
-          backdrop-filter: blur(12px);
-          box-shadow: 0 0 30px rgba(0,0,0,0.4);
-          animation: fadeIn 1s ease-out;
-        }
-
-        @keyframes fadeIn {
-          from { opacity: 0; transform: scale(0.95); }
-          to { opacity: 1; transform: scale(1); }
-        }
-
-        img.logo {
-          width: 80px;
-          margin-bottom: 20px;
-          animation: pulse 2s infinite ease-in-out;
-        }
-
-        @keyframes pulse {
-          0%, 100% { transform: scale(1); opacity: 1; }
-          50% { transform: scale(1.1); opacity: 0.8; }
-        }
-
-        h1 {
-          font-size: 2em;
-          margin: 0;
-        }
-
-        .countdown {
-          font-size: 1.5em;
-          margin: 20px 0;
-        }
-
-        .button {
-          padding: 12px 25px;
-          font-size: 1em;
-          color: #fff;
-          background-color: #0088cc;
-          border: none;
-          border-radius: 8px;
-          cursor: pointer;
-          text-decoration: none;
-          transition: background 0.3s ease;
-        }
-
-        .button:hover {
-          background-color: #0070b8;
-        }
-      </style>
-      <script>
-        let time = 3;
-        function countdown() {
-          const el = document.getElementById('count');
-          const interval = setInterval(() => {
-            time--;
-            if (el) el.textContent = time;
-            if (time === 0) {
-              clearInterval(interval);
-              window.location.href = '${tgURL}';
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <title>Redirecting...</title>
+        <style>
+            body {
+                margin: 0;
+                padding: 0;
+                height: 100vh;
+                background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+                font-family: 'Segoe UI', sans-serif;
+                color: #ffffff;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
             }
-          }, 1000);
-        }
-        window.onload = countdown;
-      </script>
+
+            .card {
+                background: rgba(255, 255, 255, 0.05);
+                border-radius: 20px;
+                padding: 40px;
+                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.37);
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
+                border: 1px solid rgba(255, 255, 255, 0.18);
+            }
+
+            h1 {
+                font-size: 2.5em;
+                margin-bottom: 15px;
+            }
+
+            p {
+                font-size: 1.2em;
+                margin-top: 10px;
+            }
+
+            .loader {
+                border: 6px solid rgba(255,255,255,0.3);
+                border-top: 6px solid #ffffff;
+                border-radius: 50%;
+                width: 60px;
+                height: 60px;
+                animation: spin 1s linear infinite;
+                margin: 20px auto;
+            }
+
+            @keyframes spin {
+                0% { transform: rotate(0deg); }
+                100% { transform: rotate(360deg); }
+            }
+
+            @media (max-width: 600px) {
+                h1 { font-size: 2em; }
+                p { font-size: 1em; }
+            }
+        </style>
     </head>
     <body>
-      <div class="blob"></div>
-      <div class="blob"></div>
-      <div class="container">
-        <img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram" />
-        <h1>Redirecting to <strong>${bot}</strong></h1>
-        <div class="countdown">In <span id="count">3</span> seconds...</div>
-        <a class="button" href="${tgURL}">Open in Telegram</a>
-      </div>
+        <div class="card">
+            <div class="loader"></div>
+            <h1>Redirecting you to <span class="emoji">➡️</span> ${bot} <span class="emoji">🚀</span></h1>
+            <p>Hang tight! You’ll land in Telegram in a moment...</p>
+        </div>
+        <script>
+            setTimeout(() => {
+                window.location.href = '${tgURL}';
+            }, 3000);
+        </script>
     </body>
     </html>
   `);
 });
 
+// Invalid URL handler
 app.get("*", (req, res) => {
   res.status(400).send("Invalid URL format");
 });
 
+// Start server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log("Server running on port " + PORT);
+  console.log(\`Server running on port \${PORT}\`);
 });
