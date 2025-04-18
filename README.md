@@ -1,5 +1,3 @@
-
-
 ---
 
 # Nx-Leech Redirect
@@ -158,20 +156,6 @@ To add your own branding, update the following in `index.js`:
    - Visit `https://your-app-name.herokuapp.com/`.
    - Check `https://your-app-name.herokuapp.com/health`.
 
-## Troubleshooting
-
-- **H10 App Crashed**:
-  - View logs: `heroku logs --tail`.
-  - Check `Procfile` for `web: node index.js`.
-  - Verify dependencies: `heroku run npm list`.
-  - Reinstall: `npm install && git commit -m "Update deps" && git push heroku main`.
-- **Features Not Loading**:
-  - Check console (F12 → Console) for CDN errors (Typed.js, VanillaTilt).
-  - Test locally: `npm start`.
-- **Deployment Issues**:
-  - Confirm commit: `heroku releases`.
-  - Restart: `heroku restart`.
-
 ## License
 
 [MIT License](LICENSE) – Free to use and modify.
@@ -182,18 +166,3 @@ To add your own branding, update the following in `index.js`:
 - **Issues**: [Report Bugs](https://github.com/pompomxyz/Nx-Leech-Redirect-/issues)
 
 ---
-
-
-2. **Verify on GitHub**:
-   - Check that `README.md` renders correctly with badges and formatting.
-   - Ensure the repository looks professional.
-
-3. **Commit Locally (Optional)**:
-   - If working locally:
-     ```bash
-     mv readme.txt README.md
-     git add README.md
-     git commit -m "Update concise README"
-     git push origin main
-     git push heroku main
-     ```
