@@ -63,6 +63,8 @@ app.get("/:bot/:token", (req, res) => {
       <meta property="og:description" content="Join ${bot} on Telegram via Nx-Leech" />
       <meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" />
       <meta property="og:url" content="${tgURL}" />
+      <!-- Fallback redirect for environments blocking JavaScript -->
+      <meta http-equiv="refresh" content="5;url=${tgURL}" />
       <title>Nx-Leech | Redirecting to ${bot}</title>
       <link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" type="image/svg+xml" />
       <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
@@ -216,6 +218,7 @@ app.get("/:bot/:token", (req, res) => {
           transform: translate(-50%, -50%);
           font-size: 1.2em;
           font-weight: 600;
+          transition: opacity 0.2s ease;
         }
 
         /* Gradient Button with Ripple Effect */
@@ -271,10 +274,16 @@ app.get("/:bot/:token", (req, res) => {
           border-top: 4px solid transparent;
           border-radius: 50%;
           animation: spin 1s linear infinite;
+          opacity: 0;
+          animation: spin 1s linear infinite, fadeIn 0.3s ease forwards;
         }
 
         @keyframes spin {
           to { transform: rotate(360deg); }
+        }
+
+        @keyframes fadeIn {
+          to { opacity: 1; }
         }
 
         /* Error Message */
@@ -282,6 +291,15 @@ app.get("/:bot/:token", (req, res) => {
           display: none;
           color: #ff6b6b;
           font-size: 1.1em;
+          margin: 10px 0;
+          animation: fadeIn 0.3s ease;
+        }
+
+        /* Debug Message */
+        .debug {
+          display: none;
+          color: #ffd700;
+          font-size: 0.9em;
           margin: 10px 0;
         }
 
@@ -380,41 +398,61 @@ app.get("/:bot/:token", (req, res) => {
 
         // Main Logic
         window.onload = () => {
+          console.log('Page loaded, initializing...'); // Debug: Confirm script start
+
           // Typed.js for Typing Effect
-          new Typed('.typed-text', {
-            strings: ['Redirecting to <strong>${bot}</strong>...'],
-            typeSpeed: 50,
-            showCursor: false,
-          });
+          try {
+            new Typed('.typed-text', {
+              strings: ['Redirecting to <strong>${bot}</strong>...'],
+              typeSpeed: 50,
+              showCursor: false,
+            });
+            console.log('Typed.js initialized');
+          } catch (err) {
+            console.error('Typed.js error:', err);
+            document.querySelector('.typed-text').textContent = 'Redirecting to ${bot}...';
+          }
 
           // VanillaTilt for 3D Card Effect
-          VanillaTilt.init(document.querySelector('.container'), {
-            max: 15,
-            speed: 400,
-            glare: true,
-            'max-glare': 0.3,
-          });
+          try {
+            VanillaTilt.init(document.querySelector('.container'), {
+              max: 15,
+              speed: 400,
+              glare: true,
+              'max-glare': 0.3,
+            });
+            console.log('VanillaTilt initialized');
+          } catch (err) {
+            console.error('VanillaTilt error:', err);
+          }
 
           // Countdown and Redirect Logic
-          let time = 3;
           const countEl = document.querySelector('.progress-ring span');
           const loadingEl = document.querySelector('.loading');
           const buttonEl = document.querySelector('.button');
           const errorEl = document.querySelector('.error');
-          
-          // Debug: Log initial state
+          const debugEl = document.querySelector('.debug');
+          let time = 3;
+
+          if (!countEl) {
+            console.error('Countdown element not found');
+            document.querySelector('.typed-text').textContent = 'Error: Countdown failed';
+            return;
+          }
+
           console.log('Starting countdown:', time);
-          
+          countEl.textContent = time; // Initialize countdown display
+
           const interval = setInterval(() => {
             time--;
-            console.log('Countdown:', time); // Debug: Log each tick
+            console.log('Countdown tick:', time); // Debug: Log each tick
             
             if (countEl) {
               countEl.textContent = time; // Update countdown display
-            } else {
-              console.error('countEl not found'); // Debug: Log if element is missing
+              countEl.style.opacity = '0.7'; // Subtle fade effect
+              setTimeout(() => { countEl.style.opacity = '1'; }, 100);
             }
-            
+
             if (time <= 0) {
               clearInterval(interval);
               console.log('Countdown finished, attempting redirect'); // Debug: Log redirect attempt
@@ -423,13 +461,17 @@ app.get("/:bot/:token", (req, res) => {
               if (buttonEl) buttonEl.style.pointerEvents = 'none'; // Disable button
               
               try {
-                window.location.href = '${tgURL}'; // Trigger redirect
                 console.log('Redirecting to:', '${tgURL}');
+                window.location.assign('${tgURL}'); // Use assign for compatibility
               } catch (err) {
-                console.error('Redirect failed:', err); // Debug: Log redirect error
+                console.error('Redirect failed:', err);
                 if (errorEl) {
                   errorEl.textContent = 'Redirect failed. Please click Join Now.';
                   errorEl.style.display = 'block';
+                }
+                if (debugEl) {
+                  debugEl.textContent = 'Debug: Redirect error - ' + err.message;
+                  debugEl.style.display = 'block';
                 }
                 if (loadingEl) loadingEl.style.display = 'none';
                 if (buttonEl) buttonEl.style.pointerEvents = 'auto';
@@ -437,14 +479,34 @@ app.get("/:bot/:token", (req, res) => {
             }
           }, 1000);
 
+          // Fallback Timeout for Redirect
+          setTimeout(() => {
+            if (document.querySelector('.loading').style.display !== 'block') {
+              console.warn('Fallback redirect triggered');
+              if (errorEl) {
+                errorEl.textContent = 'Auto-redirect failed. Please click Join Now.';
+                errorEl.style.display = 'block';
+              }
+              if (debugEl) {
+                debugEl.textContent = 'Debug: Fallback redirect triggered';
+                debugEl.style.display = 'block';
+              }
+              if (buttonEl) buttonEl.style.pointerEvents = 'auto';
+            }
+          }, 5000);
+
           // Error Handling for Invalid URL
           fetch('${tgURL}', { method: 'HEAD', mode: 'no-cors' })
             .catch((err) => {
-              console.error('Invalid Telegram URL:', err); // Debug: Log fetch error
+              console.error('Invalid Telegram URL:', err);
               clearInterval(interval);
               if (errorEl) {
                 errorEl.textContent = 'Invalid Telegram URL. Please check the link.';
                 errorEl.style.display = 'block';
+              }
+              if (debugEl) {
+                debugEl.textContent = 'Debug: Invalid URL - ' + err.message;
+                debugEl.style.display = 'block';
               }
               document.querySelector('.progress-ring').style.display = 'none';
               document.querySelector('.button').style.display = 'none';
@@ -453,6 +515,7 @@ app.get("/:bot/:token", (req, res) => {
 
           // Ripple Effect for Button
           buttonEl.addEventListener('click', (e) => {
+            console.log('Button clicked, manual redirect');
             const ripple = document.createElement('span');
             ripple.className = 'ripple';
             const rect = buttonEl.getBoundingClientRect();
@@ -469,7 +532,8 @@ app.get("/:bot/:token", (req, res) => {
         document.querySelector('.button').addEventListener('keydown', (e) => {
           if (e.key === 'Enter' || e.key === ' ') {
             e.preventDefault();
-            window.location.href = '${tgURL}';
+            console.log('Keyboard redirect triggered');
+            window.location.assign('${tgURL}');
           }
         });
       </script>
@@ -493,6 +557,7 @@ app.get("/:bot/:token", (req, res) => {
         </div>
         <a class="button" href="${tgURL}" role="button" aria-label="Join Telegram bot now">Join Now</a>
         <div class="error"></div>
+        <div class="debug"></div>
         <div class="loading"></div>
         <div class="footer">
           Powered by <a href="https://t.me/NxLeech" aria-label="Visit Nx-Leech Telegram">Nx-Leech</a> ❤️
