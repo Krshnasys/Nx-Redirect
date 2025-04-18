@@ -21,8 +21,9 @@ Every part of this project—from the design to the redirect logic—can be cust
 5. scale up dynos 
 6. Optionally add your custom domain from Heroku dashboard
 
-## Heroku Deployment Hard Way
+## Deploy with CLI
 
+Install CLI using official docs: https://devcenter.heroku.com/articles/heroku-cli
 1. **Initialize Git**:
    ```bash
    git init
