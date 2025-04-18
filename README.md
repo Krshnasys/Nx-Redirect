@@ -26,7 +26,7 @@ Every part of this project—from the design to the redirect logic—can be cust
 
 1. **Clone the Repository**:
    ```bash
-   git clone https://github.com/pompomxyz/Nx-Leech-Redirect-.git
+   git clone https://github.com/Krshnasys/Nx-Redirect.git
    cd Nx-Leech-Redirect-
    ```
 
@@ -55,7 +55,7 @@ To add your own branding, update the following in `index.js`:
 - **Links**:
   - **GitHub Icon**:
     ```html
-    <a class="github-button" href="https://github.com/pompomxyz/Nx-Leech-Redirect-" ...>
+    <a class="github-button" href="https://github.com/Krshnasys/Nx-Redirect" ...>
     ```
     Update to your repo (e.g., `https://github.com/your-username/your-repo`).
   - **Join Button**:
@@ -144,7 +144,7 @@ To add your own branding, update the following in `index.js`:
 
 ## Contact
 
-- **GitHub**: [pompomxyz](https://github.com/pompomxyz)
-- **Issues**: [Report Bugs](https://github.com/pompomxyz/Nx-Leech-Redirect-/issues)
+- **GitHub**: [pompomxyz](https://github.com/Krshnasys)
+- **Issues**: [Report Bugs](https://github.com/Krshnasys/Nx-Redirect/issues)
 
 ---
