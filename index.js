@@ -218,8 +218,9 @@ app.get("/:bot/:token", (req, res) => {
           font-weight: 600;
         }
 
-        /* Gradient Button */
+        /* Gradient Button with Ripple Effect */
         .button {
+          position: relative;
           display: inline-block;
           padding: 14px 35px;
           font-size: 1.1em;
@@ -233,6 +234,7 @@ app.get("/:bot/:token", (req, res) => {
           animation: fadeInText 1s ease-out 0.6s forwards;
           opacity: 0;
           cursor: pointer;
+          overflow: hidden;
         }
 
         .button:hover {
@@ -244,6 +246,19 @@ app.get("/:bot/:token", (req, res) => {
         .button:active {
           transform: translateY(0);
           box-shadow: 0 3px 15px rgba(0, 221, 235, 0.3);
+        }
+
+        .button .ripple {
+          position: absolute;
+          background: rgba(255, 255, 255, 0.3);
+          border-radius: 50%;
+          transform: scale(0);
+          animation: rippleEffect 0.6s linear;
+          pointer-events: none;
+        }
+
+        @keyframes rippleEffect {
+          to { transform: scale(4); opacity: 0; }
         }
 
         /* Loading Animation */
@@ -260,6 +275,14 @@ app.get("/:bot/:token", (req, res) => {
 
         @keyframes spin {
           to { transform: rotate(360deg); }
+        }
+
+        /* Error Message */
+        .error {
+          display: none;
+          color: #ff6b6b;
+          font-size: 1.1em;
+          margin: 10px 0;
         }
 
         /* Footer */
@@ -377,30 +400,69 @@ app.get("/:bot/:token", (req, res) => {
           const countEl = document.querySelector('.progress-ring span');
           const loadingEl = document.querySelector('.loading');
           const buttonEl = document.querySelector('.button');
+          const errorEl = document.querySelector('.error');
+          
+          // Debug: Log initial state
+          console.log('Starting countdown:', time);
+          
           const interval = setInterval(() => {
             time--;
+            console.log('Countdown:', time); // Debug: Log each tick
+            
             if (countEl) {
               countEl.textContent = time; // Update countdown display
+            } else {
+              console.error('countEl not found'); // Debug: Log if element is missing
             }
+            
             if (time <= 0) {
               clearInterval(interval);
+              console.log('Countdown finished, attempting redirect'); // Debug: Log redirect attempt
+              
               if (loadingEl) loadingEl.style.display = 'block'; // Show loading spinner
               if (buttonEl) buttonEl.style.pointerEvents = 'none'; // Disable button
-              setTimeout(() => {
+              
+              try {
                 window.location.href = '${tgURL}'; // Trigger redirect
-              }, 500); // Brief delay for loading animation
+                console.log('Redirecting to:', '${tgURL}');
+              } catch (err) {
+                console.error('Redirect failed:', err); // Debug: Log redirect error
+                if (errorEl) {
+                  errorEl.textContent = 'Redirect failed. Please click Join Now.';
+                  errorEl.style.display = 'block';
+                }
+                if (loadingEl) loadingEl.style.display = 'none';
+                if (buttonEl) buttonEl.style.pointerEvents = 'auto';
+              }
             }
           }, 1000);
 
           // Error Handling for Invalid URL
           fetch('${tgURL}', { method: 'HEAD', mode: 'no-cors' })
-            .catch(() => {
+            .catch((err) => {
+              console.error('Invalid Telegram URL:', err); // Debug: Log fetch error
               clearInterval(interval);
-              document.querySelector('.typed-text').innerHTML = 'Invalid Telegram URL. Please check the link.';
+              if (errorEl) {
+                errorEl.textContent = 'Invalid Telegram URL. Please check the link.';
+                errorEl.style.display = 'block';
+              }
               document.querySelector('.progress-ring').style.display = 'none';
               document.querySelector('.button').style.display = 'none';
               document.querySelector('.loading').style.display = 'none';
             });
+
+          // Ripple Effect for Button
+          buttonEl.addEventListener('click', (e) => {
+            const ripple = document.createElement('span');
+            ripple.className = 'ripple';
+            const rect = buttonEl.getBoundingClientRect();
+            const size = Math.max(rect.width, rect.height);
+            ripple.style.width = ripple.style.height = size + 'px';
+            ripple.style.left = e.clientX - rect.left - size / 2 + 'px';
+            ripple.style.top = e.clientY - rect.top - size / 2 + 'px';
+            buttonEl.appendChild(ripple);
+            setTimeout(() => ripple.remove(), 600);
+          });
         };
 
         // Accessibility: Keyboard Navigation
@@ -430,6 +492,7 @@ app.get("/:bot/:token", (req, res) => {
           <span>3</span>
         </div>
         <a class="button" href="${tgURL}" role="button" aria-label="Join Telegram bot now">Join Now</a>
+        <div class="error"></div>
         <div class="loading"></div>
         <div class="footer">
           Powered by <a href="https://t.me/NxLeech" aria-label="Visit Nx-Leech Telegram">Nx-Leech</a> ❤️
