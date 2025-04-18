@@ -64,7 +64,7 @@ app.get("/:bot/:token", (req, res) => {
       <meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" />
       <meta property="og:url" content="${tgURL}" />
       <!-- Fallback redirect for Telegram's in-app browser -->
-      <meta http-equiv="refresh" content="5;url=${tgURL}" />
+      <meta http-equiv="refresh" content="7;url=${tgURL}" />
       <title>Nx-Leech | Redirecting to ${bot}</title>
       <link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" type="image/svg+xml" />
       <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
@@ -204,7 +204,7 @@ app.get("/:bot/:token", (req, res) => {
           r: 37;
           stroke-dasharray: 232.477;
           stroke-dashoffset: 232.477;
-          animation: ringProgress 3s linear forwards;
+          animation: ringProgress 5s linear forwards;
         }
 
         @keyframes ringProgress {
@@ -441,9 +441,9 @@ app.get("/:bot/:token", (req, res) => {
           <svg>
             <circle cx="40" cy="40" r="37"></circle>
           </svg>
-          <span>3</span>
+          <span>5</span>
         </div>
-        <a class="button" href="${tgURL}" role="button" aria-label="Join Telegram bot now">Join Now</a>
+        <a class="button" href="${tgURL}" role="button" aria-label="Click to verify and join Telegram bot">Click to Verify</a>
         <div class="error"></div>
         <div class="loading"></div>
         <div class="footer">
@@ -507,10 +507,10 @@ app.get("/:bot/:token", (req, res) => {
           const loadingEl = document.querySelector('.loading');
           const buttonEl = document.querySelector('.button');
           const errorEl = document.querySelector('.error');
-          let time = 3;
+          let time = 5;
 
           if (!countEl) {
-            errorEl.textContent = 'Error: Countdown failed. Please click Join Now.';
+            errorEl.textContent = 'Error: Countdown failed. Please click to verify.';
             errorEl.style.display = 'block';
             return;
           }
@@ -538,7 +538,7 @@ app.get("/:bot/:token", (req, res) => {
                 window.location.href = '${tgURL}';
                 window.open('${tgURL}', '_blank');
               } catch (err) {
-                errorEl.textContent = 'Redirect failed. Please click Join Now.';
+                errorEl.textContent = 'Redirect failed. Please click to verify.';
                 errorEl.style.display = 'block';
                 loadingEl.style.display = 'none';
                 buttonEl.style.pointerEvents = 'auto';
@@ -549,11 +549,11 @@ app.get("/:bot/:token", (req, res) => {
           // Fallback Timeout
           setTimeout(() => {
             if (document.querySelector('.loading').style.display !== 'block') {
-              errorEl.textContent = 'Auto-redirect failed. Please click Join Now.';
+              errorEl.textContent = 'Auto-redirect failed. Please click to verify.';
               errorEl.style.display = 'block';
               buttonEl.style.pointerEvents = 'auto';
             }
-          }, 5000);
+          }, 7000);
         };
 
         // Initialize
