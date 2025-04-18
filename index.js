@@ -1,10 +1,6 @@
 const express = require("express");
 const app = express();
 
-//const express = require('express');
-//const app = express();
-//const port = process.env.PORT || 3000;
-
 app.get("/", (req, res) => {
   res.send(`
     <!DOCTYPE html>
@@ -418,9 +414,6 @@ app.get("/", (req, res) => {
   `);
 });
 
-//app.listen(port, () => {
-  //console.log(`Server running on port ${port}`);
-//});
 app.get("/:bot/:token", (req, res) => {
   const { bot, token } = req.params;
   const tgURL = `https://t.me/${bot}?start=${token}`;
