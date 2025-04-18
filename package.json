@@ -8,6 +8,6 @@
     "express": "^4.18.2"
   },
   "engines": {
-    "node": "22.x"
+    "node": "18.x"
   }
 }
