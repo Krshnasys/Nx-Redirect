@@ -50,63 +50,6 @@ Every part of this project—from the design to the redirect logic—can be cust
    ```
    Open `http://localhost:3000/` to view the homepage or `http://localhost:3000/health` for the health check.
 
-## Customization
-
-To add your own branding, update the following in `index.js`:
-
-- **Tagline Text**:
-  - Find:
-    ```javascript
-    strings: ['24/7 Free Mirror and Leech Services', 'Built with Nx Leech 🔧♨️']
-    ```
-  - Replace with your messages (e.g., `['Your Service Name', 'Your Tagline']`).
-
-- **Links**:
-  - **GitHub Icon**:
-    ```html
-    <a class="github-button" href="https://github.com/Krshnasys/Nx-Redirect" ...>
-    ```
-    Update to your repo (e.g., `https://github.com/your-username/your-repo`).
-  - **Join Button**:
-    ```html
-    <a class="button" href="https://t.me/NxLeech" ...>
-    ```
-    Change to your Telegram channel (e.g., `https://t.me/YourChannel`).
-  - **Footer Link**:
-    ```html
-    <a href="https://t.me/NxLeech">Nx-Leech</a>
-    ```
-    Use your link and name.
-
-- **Logo and Favicon**:
-  - Update the favicon in `index.js`:
-    ```html
-    <link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" ...>
-    ```
-    Replace with your favicon URL or local file (e.g., `/favicon.ico`).
-  - Update the logo:
-    ```html
-    <svg class="logo" ...>
-    ```
-    Replace with your SVG or image.
-
-- **Meta Tags**:
-  - Update Open Graph tags:
-    ```html
-    <meta property="og:title" content="Nx-Leech | Home">
-    <meta property="og:description" content="Join Nx-Leech for 24/7 free mirror and leech services, built with ❤️🚀">
-    <meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg">
-    <meta property="og:url" content="https://nxredirect-428abc69e62a.herokuapp.com/">
-    ```
-    Use your project’s title, description, image, and URL.
-
-- **Credits**:
-  - Update the footer:
-    ```html
-    Made with ❤️ by <a href="https://t.me/NxLeech">Nx-Leech</a>
-    ```
-    Change to your name and link (e.g., `Made with ❤️ by <a href="https://your-site.com">Your Name</a>`).
-
 ## Deployment to Heroku
 
 1. **Initialize Git**:
