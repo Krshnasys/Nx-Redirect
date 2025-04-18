@@ -13,44 +13,15 @@ Every part of this project—from the design to the redirect logic—can be cust
 ![Homepage Logo](assets/homepage.png)
 ![Redirect Logo](assets/Redirect.png)
 
-## Deployment (Easy Way)
+## Heroku Deployment (Easy Way)
 1. Fork this repository
 2. Create new Heroku app
 3. Connect GitHub Repository 
 4. Select Branch & Deploy
 5. scale up dynos 
 6. Optionally add your custom domain from Heroku dashboard
-   
-## Deployment (The Hard way)
 
-## Prerequisites
-
-- **Node.js** (v18.x, tested with v18.20.8): [Download](https://nodejs.org/)
-- **npm**: Included with Node.js
-- **Git**: [Install](https://git-scm.com/downloads)
-- **Heroku CLI**: [Install](https://devcenter.heroku.com/articles/heroku-cli)
-- **Heroku Account**: Sign up at [Heroku](https://www.heroku.com/)
-
-# Installation
-
-1. **Clone the Repository**:
-   ```bash
-   git clone https://github.com/Krshnasys/Nx-Redirect.git
-   cd Nx-Redirect
-   ```
-
-2. **Install Dependencies**:
-   ```bash
-   npm install
-   ```
-
-3. **Run Locally**:
-   ```bash
-   npm start
-   ```
-   Open `http://localhost:3000/` to view the homepage or `http://localhost:3000/health` for the health check.
-
-## Deployment to Heroku
+## Heroku Deployment Hard Way
 
 1. **Initialize Git**:
    ```bash
@@ -89,6 +60,35 @@ Every part of this project—from the design to the redirect logic—can be cust
 7. **Test**:
    - Visit `https://your-app-name.herokuapp.com/`.
    - Check `https://your-app-name.herokuapp.com/health`.
+   
+## Deployment (The Hard way)
+
+## Prerequisites
+
+- **Node.js** (v18.x, tested with v18.20.8): [Download](https://nodejs.org/)
+- **npm**: Included with Node.js
+- **Git**: [Install](https://git-scm.com/downloads)
+- **Heroku CLI**: [Install](https://devcenter.heroku.com/articles/heroku-cli)
+- **Heroku Account**: Sign up at [Heroku](https://www.heroku.com/)
+
+# Installation
+
+1. **Clone the Repository**:
+   ```bash
+   git clone https://github.com/Krshnasys/Nx-Redirect.git
+   cd Nx-Redirect
+   ```
+
+2. **Install Dependencies**:
+   ```bash
+   npm install
+   ```
+
+3. **Run Locally**:
+   ```bash
+   npm start
+   ```
+   Open `http://localhost:3000/` to view the homepage or `http://localhost:3000/health` for the health check.
 
 ## License
 
