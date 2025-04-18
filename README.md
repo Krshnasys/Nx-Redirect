@@ -29,7 +29,7 @@ Every part of this project—from the design to the redirect logic—can be cust
 4. scale up dynos 
 5. Optionally add your custom domain from Heroku dashboard
    
-##Deployment (Hard way)
+## Deployment (The Hard way)
 # Installation
 
 1. **Clone the Repository**:
