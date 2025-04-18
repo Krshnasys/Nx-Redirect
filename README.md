@@ -13,14 +13,6 @@ Every part of this project—from the design to the redirect logic—can be cust
 ![Homepage Logo](assets/homepage.png)
 ![Redirect Logo](assets/Redirect.png)
 
-## Prerequisites
-
-- **Node.js** (v18.x, tested with v18.20.8): [Download](https://nodejs.org/)
-- **npm**: Included with Node.js
-- **Git**: [Install](https://git-scm.com/downloads)
-- **Heroku CLI**: [Install](https://devcenter.heroku.com/articles/heroku-cli)
-- **Heroku Account**: Sign up at [Heroku](https://www.heroku.com/)
-
 ## Deployment (Easy Way)
 1. Fork this repository
 2. Click the Heroku button above
@@ -29,6 +21,15 @@ Every part of this project—from the design to the redirect logic—can be cust
 5. Optionally add your custom domain from Heroku dashboard
    
 ## Deployment (The Hard way)
+
+## Prerequisites
+
+- **Node.js** (v18.x, tested with v18.20.8): [Download](https://nodejs.org/)
+- **npm**: Included with Node.js
+- **Git**: [Install](https://git-scm.com/downloads)
+- **Heroku CLI**: [Install](https://devcenter.heroku.com/articles/heroku-cli)
+- **Heroku Account**: Sign up at [Heroku](https://www.heroku.com/)
+
 # Installation
 
 1. **Clone the Repository**:
