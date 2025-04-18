@@ -56,117 +56,223 @@ app.get("/:bot/:token", (req, res) => {
     <html lang="en">
     <head>
       <meta charset="UTF-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-      <title>Redirecting...</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <meta name="description" content="Redirecting to Telegram bot ${bot}" />
+      <meta name="author" content="Nx-Leech" />
+      <title>Redirecting to ${bot}</title>
+      <link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" type="image/svg+xml" />
+      <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
       <style>
-        body {
+        * {
           margin: 0;
           padding: 0;
-          font-family: 'Segoe UI', sans-serif;
-          background: radial-gradient(circle at top left, #0088cc, #005f8d);
+          box-sizing: border-box;
+        }
+
+        body {
+          font-family: 'Poppins', sans-serif;
+          background: linear-gradient(135deg, #1e3c72, #2a5298);
           height: 100vh;
           display: flex;
-          align-items: center;
           justify-content: center;
+          align-items: center;
           overflow: hidden;
-          color: white;
-          text-align: center;
+          color: #fff;
+          position: relative;
         }
 
-        .blob {
+        /* Background Particles */
+        .particles {
           position: absolute;
-          width: 300px;
-          height: 300px;
-          background: rgba(255, 255, 255, 0.1);
-          border-radius: 50%;
-          animation: blobMove 10s infinite ease-in-out;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          pointer-events: none;
+          z-index: 1;
         }
 
-        .blob:nth-child(1) { top: 10%; left: 20%; }
-        .blob:nth-child(2) { bottom: 10%; right: 15%; }
-
-        @keyframes blobMove {
-          0%, 100% { transform: translateY(0) scale(1); }
-          50% { transform: translateY(-20px) scale(1.1); }
-        }
-
+        /* Glassmorphism Container */
         .container {
+          background: rgba(255, 255, 255, 0.1);
+          backdrop-filter: blur(10px);
+          border-radius: 20px;
+          padding: 40px;
+          max-width: 500px;
+          width: 90%;
+          text-align: center;
+          box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+          border: 1px solid rgba(255, 255, 255, 0.2);
+          animation: fadeIn 0.8s ease-out;
           position: relative;
           z-index: 2;
-          background: rgba(0,0,0,0.3);
-          padding: 40px;
-          border-radius: 15px;
-          backdrop-filter: blur(12px);
-          box-shadow: 0 0 30px rgba(0,0,0,0.4);
-          animation: fadeIn 1s ease-out;
         }
 
         @keyframes fadeIn {
-          from { opacity: 0; transform: scale(0.95); }
-          to { opacity: 1; transform: scale(1); }
+          from { opacity: 0; transform: translateY(20px); }
+          to { opacity: 1; transform: translateY(0); }
         }
 
-        img.logo {
-          width: 80px;
+        /* Logo Animation */
+        .logo {
+          width: 100px;
           margin-bottom: 20px;
-          animation: pulse 2s infinite ease-in-out;
+          animation: float 3s ease-in-out infinite;
         }
 
-        @keyframes pulse {
-          0%, 100% { transform: scale(1); opacity: 1; }
-          50% { transform: scale(1.1); opacity: 0.8; }
+        @keyframes float {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-10px); }
         }
 
         h1 {
-          font-size: 2em;
-          margin: 0;
+          font-size: 2.2em;
+          font-weight: 600;
+          margin-bottom: 10px;
         }
 
         .countdown {
-          font-size: 1.5em;
+          font-size: 1.2em;
           margin: 20px 0;
+          color: #e0e0e0;
         }
 
+        /* Progress Bar */
+        .progress-bar {
+          width: 100%;
+          height: 6px;
+          background: rgba(255, 255, 255, 0.2);
+          border-radius: 3px;
+          overflow: hidden;
+          margin: 15px 0;
+        }
+
+        .progress {
+          width: 100%;
+          height: 100%;
+          background: #00c4ff;
+          animation: progress 3s linear forwards;
+        }
+
+        @keyframes progress {
+          from { width: 100%; }
+          to { width: 0; }
+        }
+
+        /* Gradient Button */
         .button {
-          padding: 12px 25px;
+          display: inline-block;
+          padding: 12px 30px;
           font-size: 1em;
+          font-weight: 600;
           color: #fff;
-          background-color: #0088cc;
-          border: none;
-          border-radius: 8px;
-          cursor: pointer;
+          background: linear-gradient(45deg, #00c4ff, #0078ff);
+          border-radius: 10px;
           text-decoration: none;
-          transition: background 0.3s ease;
+          transition: transform 0.3s, box-shadow 0.3s;
+          box-shadow: 0 4px 15px rgba(0, 180, 255, 0.4);
         }
 
         .button:hover {
-          background-color: #0070b8;
+          transform: translateY(-2px);
+          box-shadow: 0 6px 20px rgba(0, 180, 255, 0.6);
+        }
+
+        /* Loading Spinner */
+        .spinner {
+          display: none;
+          width: 24px;
+          height: 24px;
+          border: 3px solid #fff;
+          border-top: 3px solid transparent;
+          border-radius: 50%;
+          animation: spin 1s linear infinite;
+          margin: 10px auto;
+        }
+
+        @keyframes spin {
+          to { transform: rotate(360deg); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+          .container {
+            padding: 20px;
+          }
+          h1 {
+            font-size: 1.8em;
+          }
+          .logo {
+            width: 80px;
+          }
         }
       </style>
       <script>
+        // Particle Animation
+        function createParticles() {
+          const particlesContainer = document.querySelector('.particles');
+          for (let i = 0; i < 50; i++) {
+            const particle = document.createElement('div');
+            particle.style.cssText = \`
+              position: absolute;
+              width: \${Math.random() * 4 + 2}px;
+              height: \${Math.random() * 4 + 2}px;
+              background: rgba(255, 255, 255, \${Math.random() * 0.3 + 0.1});
+              border-radius: 50%;
+              left: \${Math.random() * 100}%;
+              top: \${Math.random() * 100}%;
+              animation: move \${Math.random() * 10 + 5}s linear infinite;
+            \`;
+            particlesContainer.appendChild(particle);
+          }
+        }
+
+        // Particle Movement Animation
+        const style = document.createElement('style');
+        style.textContent = \`
+          @keyframes move {
+            0% { transform: translateY(0) translateX(0); opacity: 1; }
+            100% { transform: translateY(\${Math.random() * 200 - 100}px) translateX(\${Math.random() * 200 - 100}px); opacity: 0; }
+          }
+        \`;
+        document.head.appendChild(style);
+
+        // Countdown Logic
         let time = 3;
         function countdown() {
-          const el = document.getElementById('count');
+          const countEl = document.getElementById('count');
+          const spinner = document.querySelector('.spinner');
           const interval = setInterval(() => {
             time--;
-            if (el) el.textContent = time;
+            if (countEl) countEl.textContent = time;
             if (time === 0) {
               clearInterval(interval);
-              window.location.href = '${tgURL}';
+              spinner.style.display = 'block';
+              setTimeout(() => {
+                window.location.href = '${tgURL}';
+              }, 500);
             }
           }, 1000);
         }
-        window.onload = countdown;
+
+        // Initialize
+        window.onload = () => {
+          createParticles();
+          countdown();
+        };
       </script>
     </head>
     <body>
-      <div class="blob"></div>
-      <div class="blob"></div>
+      <div class="particles"></div>
       <div class="container">
-        <img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram" />
+        <img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram Logo" />
         <h1>Redirecting to <strong>${bot}</strong></h1>
-        <div class="countdown">In <span id="count">3</span> seconds...</div>
-        <a class="button" href="${tgURL}">Open in Telegram</a>
+        <div class="countdown">Please wait <span id="count">3</span> seconds...</div>
+        <div class="progress-bar">
+          <div class="progress"></div>
+        </div>
+        <a class="button" href="${tgURL}">Open in Telegram Now</a>
+        <div class="spinner"></div>
       </div>
     </body>
     </html>
