@@ -9,20 +9,6 @@ Whether you're managing a TG bot, creating short links redirection, or integrati
 
 Every part of this project—from the design to the redirect logic—can be customized to fit your specific needs, allowing complete control over how your redirection looks and functions.
 
-
-## Features
-
-- **Dynamic Homepage**:
-  - Particle background with 30 animated cyan dots.
-  - Floating GitHub icon with hover effects, linking to the project repo.
-  - Animated tagline (via Typed.js) cycling through messages.
-  - Star-shaped SVG logo with glowing animation.
-  - “Join” button with a ripple effect, linking to a Telegram channel.
-  - Dark/light theme toggle.
-- **Responsive**: Works on mobile, desktop, and Telegram’s in-app browser.
-- **Health Check**: `/health` endpoint returns “Health check: OK”.
-- **Customizable**: Update text, links, and logos for your project.
-
 ## Screenshots 
 ![Homepage Logo](assets/homepage.png)
 ![Redirect Logo](assets/Redirect.png)
