@@ -36,7 +36,7 @@ Every part of this project—from the design to the redirect logic—can be cust
 1. **Clone the Repository**:
    ```bash
    git clone https://github.com/Krshnasys/Nx-Redirect.git
-   cd Nx-Leech-Redirect-
+   cd Nx-Redirect
    ```
 
 2. **Install Dependencies**:
