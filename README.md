@@ -1,5 +1,5 @@
 # Nx-Leech Redirect
-[![Heroku Deploy](https://img.shields.io/badge/Heroku-Deployed-430098?style=flat-square&logo=heroku)](https://herokuapp.com/)
+[![Heroku Deploy](https://img.shields.io/badge/Heroku-Deployed-430098?style=flat-square&logo=heroku)](https://herokua.com/)
 [![Node.js](https://img.shields.io/badge/Node.js-v18.20.8-green?style=flat-square&logo=node.js)](https://nodejs.org/)
 [![Express](https://img.shields.io/badge/Express-v4.18.2-blue?style=flat-square&logo=express)](https://expressjs.com/)
 [![Telegram](https://img.shields.io/badge/Telegram-Join%20Now-0088CC?style=flat-square&logo=telegram)](https://t.me/NxLeech)
