@@ -61,6 +61,20 @@ Install CLI using official docs: https://devcenter.heroku.com/articles/heroku-cl
 7. **Test**:
    - Visit `https://your-app-name.herokuapp.com/`.
    - Check `https://your-app-name.herokuapp.com/health`.
+
+### Extras
+
+- To delete the app: heroku apps:destroy YOUR-APP-NAME
+
+- To restart dyno: heroku restart
+
+- To turn off dyno: heroku ps:scale web=0
+
+- To turn on dyno: heroku ps:scale web=1
+
+- To set heroku variable: heroku config:set VARNAME=CONFIG_FILE_URL
+
+- To get live logs: heroku logs -t
    
 ## Deployment (The Hard way)
 
