@@ -302,15 +302,6 @@ app.get("/:bot/:token", (req, res) => {
           animation: fadeIn 0.3s ease;
         }
 
-        /* Debug Message */
-        .debug {
-          display: none;
-          color: #ffd700;
-          font-size: 0.9em;
-          margin: 10px 0;
-          word-break: break-all;
-        }
-
         /* Footer */
         .footer {
           margin-top: 20px;
@@ -341,10 +332,46 @@ app.get("/:bot/:token", (req, res) => {
           cursor: pointer;
           font-size: 1.2em;
           transition: transform 0.3s ease;
+          z-index: 3;
         }
 
         .theme-toggle:hover {
           transform: rotate(180deg);
+        }
+
+        /* GitHub Button */
+        .github-button {
+          position: absolute;
+          top: 20px;
+          left: 20px;
+          width: 40px;
+          height: 40px;
+          background: linear-gradient(45deg, #24292e, #444d56);
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+          transition: all 0.3s ease;
+          z-index: 3;
+          text-decoration: none;
+        }
+
+        .github-button:hover {
+          transform: scale(1.1);
+          background: linear-gradient(45deg, #444d56, #24292e);
+          box-shadow: 0 6px 16px rgba(0, 221, 235, 0.4);
+        }
+
+        .github-button:focus {
+          outline: 2px solid #00ddeb;
+          outline-offset: 2px;
+        }
+
+        .github-button svg {
+          width: 24px;
+          height: 24px;
+          fill: #fff;
         }
 
         /* Dark Mode Adjustments */
@@ -381,6 +408,10 @@ app.get("/:bot/:token", (req, res) => {
           .button {
             padding: 12px 30px;
           }
+          .github-button,
+          .theme-toggle {
+            top: 15px;
+          }
         }
 
         /* Accessibility */
@@ -395,6 +426,11 @@ app.get("/:bot/:token", (req, res) => {
         <div></div>
         <div></div>
       </div>
+      <a class="github-button" href="https://github.com/pompomxyz/Nx-Leech-Redirect-" target="_blank" aria-label="View source code on GitHub">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2C6.48 2 2 6.48 2 12c0 4.42 2.87 8.17 6.84 9.49.5.09.66-.22.66-.49v-1.7c-2.78.61-3.37-1.34-3.37-1.34-.46-1.16-1.12-1.47-1.12-1.47-.91-.62.07-.61.07-.61 1.01.07 1.54 1.04 1.54 1.04.9 1.54 2.36 1.1 2.94.84.09-.65.35-1.1.64-1.35-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02A9.56 9.56 0 0112 6.8c.85.004 1.71.11 2.52.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.69-4.57 4.94.36.31.68.92.68 1.85v2.74c0 .27.16.58.67.49A10.01 10.01 0 0022 12c0-5.52-4.48-10-10-10z"/>
+        </svg>
+      </a>
       <div class="container" tabindex="0">
         <svg class="logo" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15.93V15.5H9.5v2.43c-1.67-.36-3-1.76-3-3.43 0-1.93 1.57-3.5 3.5-3.5h1v-2.43c1.67.36 3 1.76 3 3.43 0 1.93-1.57 3.5-3.5 3.5h-1v2.43zM12 7c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z" fill="#00ddeb"/>
@@ -409,25 +445,13 @@ app.get("/:bot/:token", (req, res) => {
         </div>
         <a class="button" href="${tgURL}" role="button" aria-label="Join Telegram bot now">Join Now</a>
         <div class="error"></div>
-        <div class="debug"></div>
         <div class="loading"></div>
         <div class="footer">
           Powered by <a href="https://t.me/NxLeech" aria-label="Visit Nx-Leech Telegram">Nx-Leech</a> ❤️
         </div>
       </div>
       <script>
-        // Debug Utility: Show messages on-screen and in console
-        function debug(message) {
-          console.log(message);
-          const debugEl = document.querySelector('.debug');
-          if (debugEl) {
-            debugEl.textContent = 'Debug: ' + message;
-            debugEl.style.display = 'block';
-          }
-        }
-
         // Theme Toggle
-        debug('Initializing theme toggle');
         const themeToggle = document.createElement('div');
         themeToggle.className = 'theme-toggle';
         themeToggle.innerHTML = '🌙';
@@ -437,39 +461,34 @@ app.get("/:bot/:token", (req, res) => {
         themeToggle.addEventListener('click', () => {
           document.body.classList.toggle('light');
           themeToggle.innerHTML = document.body.classList.contains('light') ? '🌞' : '🌙';
-          debug('Theme toggled');
         });
 
         // Main Logic
-        debug('Page loaded, starting initialization');
-        
         // Load Typed.js and VanillaTilt asynchronously
         const loadScripts = () => {
           const typedScript = document.createElement('script');
           typedScript.src = 'https://cdn.jsdelivr.net/npm/typed.js@2.0.12';
           typedScript.async = true;
           typedScript.onload = () => {
-            debug('Typed.js loaded');
             try {
               new Typed('.typed-text', {
                 strings: ['Redirecting to <strong>${bot}</strong>...'],
                 typeSpeed: 50,
                 showCursor: false,
               });
-              debug('Typed.js initialized');
             } catch (err) {
-              debug('Typed.js error: ' + err.message);
               document.querySelector('.typed-text').textContent = 'Redirecting to ${bot}...';
             }
           };
-          typedScript.onerror = () => debug('Typed.js failed to load');
+          typedScript.onerror = () => {
+            document.querySelector('.typed-text').textContent = 'Redirecting to ${bot}...';
+          };
           document.head.appendChild(typedScript);
 
           const tiltScript = document.createElement('script');
           tiltScript.src = 'https://cdn.jsdelivr.net/npm/vanilla-tilt@1.7.2/dist/vanilla-tilt.min.js';
           tiltScript.async = true;
           tiltScript.onload = () => {
-            debug('VanillaTilt loaded');
             try {
               VanillaTilt.init(document.querySelector('.container'), {
                 max: 15,
@@ -477,12 +496,8 @@ app.get("/:bot/:token", (req, res) => {
                 glare: true,
                 'max-glare': 0.3,
               });
-              debug('VanillaTilt initialized');
-            } catch (err) {
-              debug('VanillaTilt error: ' + err.message);
-            }
+            } catch (err) {}
           };
-          tiltScript.onerror = () => debug('VanillaTilt failed to load');
           document.head.appendChild(tiltScript);
         };
 
@@ -495,18 +510,15 @@ app.get("/:bot/:token", (req, res) => {
           let time = 3;
 
           if (!countEl) {
-            debug('Error: Countdown element not found');
             errorEl.textContent = 'Error: Countdown failed. Please click Join Now.';
             errorEl.style.display = 'block';
             return;
           }
 
-          debug('Starting countdown: ' + time);
           countEl.textContent = time;
 
           const interval = setInterval(() => {
             time--;
-            debug('Countdown tick: ' + time);
             
             if (countEl) {
               countEl.textContent = time;
@@ -517,18 +529,15 @@ app.get("/:bot/:token", (req, res) => {
 
             if (time <= 0) {
               clearInterval(interval);
-              debug('Countdown finished, attempting redirect');
               
               if (loadingEl) loadingEl.style.display = 'block';
               if (buttonEl) buttonEl.style.pointerEvents = 'none';
               
               try {
-                debug('Redirecting to: ${tgURL}');
-                window.location.assign('${tgURL}'); // Primary redirect
-                window.location.href = '${tgURL}'; // Fallback
-                window.open('${tgURL}', '_blank'); // Telegram browser fallback
+                window.location.assign('${tgURL}');
+                window.location.href = '${tgURL}';
+                window.open('${tgURL}', '_blank');
               } catch (err) {
-                debug('Redirect failed: ' + err.message);
                 errorEl.textContent = 'Redirect failed. Please click Join Now.';
                 errorEl.style.display = 'block';
                 loadingEl.style.display = 'none';
@@ -540,7 +549,6 @@ app.get("/:bot/:token", (req, res) => {
           // Fallback Timeout
           setTimeout(() => {
             if (document.querySelector('.loading').style.display !== 'block') {
-              debug('Fallback redirect triggered');
               errorEl.textContent = 'Auto-redirect failed. Please click Join Now.';
               errorEl.style.display = 'block';
               buttonEl.style.pointerEvents = 'auto';
@@ -549,14 +557,12 @@ app.get("/:bot/:token", (req, res) => {
         };
 
         // Initialize
-        debug('Initializing scripts and countdown');
         loadScripts();
         startCountdown();
 
         // Validate Telegram URL
         fetch('${tgURL}', { method: 'HEAD', mode: 'no-cors' })
           .catch((err) => {
-            debug('Invalid Telegram URL: ' + err.message);
             document.querySelector('.error').textContent = 'Invalid Telegram URL. Please check the link.';
             document.querySelector('.error').style.display = 'block';
             document.querySelector('.progress-ring').style.display = 'none';
@@ -567,7 +573,6 @@ app.get("/:bot/:token", (req, res) => {
         // Ripple Effect and Keyboard Navigation
         const buttonEl = document.querySelector('.button');
         buttonEl.addEventListener('click', (e) => {
-          debug('Button clicked, manual redirect');
           const ripple = document.createElement('span');
           ripple.className = 'ripple';
           const rect = buttonEl.getBoundingClientRect();
@@ -582,8 +587,16 @@ app.get("/:bot/:token", (req, res) => {
         buttonEl.addEventListener('keydown', (e) => {
           if (e.key === 'Enter' || e.key === ' ') {
             e.preventDefault();
-            debug('Keyboard redirect triggered');
             window.location.assign('${tgURL}');
+          }
+        });
+
+        // GitHub Button Keyboard Navigation
+        const githubButton = document.querySelector('.github-button');
+        githubButton.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            window.open('https://github.com/pompomxyz/Nx-Leech-Redirect-', '_blank');
           }
         });
       </script>
