@@ -68,7 +68,7 @@ app.get("/", (req, res) => {
   `);
 });
 
-// Dynamic page with bot and token
+// Dynamic page with bot and token (Redirect Page)
 app.get("/:bot/:token", (req, res) => {
   const { bot, token } = req.params;
   const tgURL = `https://t.me/${bot}?start=${token}`;
@@ -77,85 +77,84 @@ app.get("/:bot/:token", (req, res) => {
     <!DOCTYPE html>
     <html lang="en">
     <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Redirecting to Telegram...</title>
-        <style>
-            body {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                min-height: 100vh;
-                background: linear-gradient(to right, #4a148c, #004d40);
-                font-family: 'Arial', sans-serif;
-                color: white;
-                margin: 0;
-                padding: 0;
-            }
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+      <title>Redirecting...</title>
+      <style>
+        body {
+          margin: 0;
+          padding: 0;
+          height: 100vh;
+          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          background: linear-gradient(-45deg, #1d2b64, #f8cdda, #2c3e50, #4ca1af);
+          background-size: 400% 400%;
+          animation: gradientBG 10s ease infinite;
+          color: #fff;
+          text-align: center;
+          overflow: hidden;
+        }
 
-            .container {
-                text-align: center;
-            }
+        @keyframes gradientBG {
+          0% {background-position: 0% 50%;}
+          50% {background-position: 100% 50%;}
+          100% {background-position: 0% 50%;}
+        }
 
-            h1 {
-                font-size: 2.5em;
-                margin-bottom: 20px;
-                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-            }
+        .container {
+          animation: fadeIn 1.2s ease-out;
+        }
 
-            p {
-                font-size: 1.5em;
-                margin-top: 20px;
-                font-style: italic;
-            }
+        @keyframes fadeIn {
+          from { opacity: 0; transform: scale(0.95); }
+          to { opacity: 1; transform: scale(1); }
+        }
 
-            .emoji {
-                font-size: 1.5em;
-            }
+        h1 {
+          font-size: 2.8em;
+          margin-bottom: 10px;
+          text-shadow: 0 0 10px rgba(255,255,255,0.7);
+        }
 
-            .loader {
-                border: 8px solid #f3f3f3;
-                border-top: 8px solid #3498db;
-                border-radius: 50%;
-                width: 50px;
-                height: 50px;
-                animation: spin 2s linear infinite;
-                margin-bottom: 20px;
-            }
+        .emoji {
+          font-size: 1.5em;
+          margin: 0 0.3em;
+        }
 
-            @keyframes spin {
-                0% {
-                    transform: rotate(0deg);
-                }
+        p {
+          font-size: 1.2em;
+          font-weight: 300;
+        }
 
-                100% {
-                    transform: rotate(360deg);
-                }
-            }
+        .loader {
+          margin: 30px auto;
+          border: 6px solid #ffffff40;
+          border-top: 6px solid #fff;
+          border-radius: 50%;
+          width: 60px;
+          height: 60px;
+          animation: spin 1.5s linear infinite;
+        }
 
-            @media (max-width: 600px) {
-                h1 {
-                    font-size: 2em;
-                }
-
-                p {
-                    font-size: 1.2em;
-                }
-            }
-        </style>
+        @keyframes spin {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
+        }
+      </style>
+      <script>
+        setTimeout(() => {
+          window.location.href = '${tgURL}';
+        }, 3000);
+      </script>
     </head>
     <body>
-        <div class="container">
-            <div class="loader"></div>
-            <h1>Redirecting you to <span class="emoji">➡️</span> ${bot} <span class="emoji">🚀</span></h1>
-            <p>You will be redirected automatically in 3 seconds...</p>
-        </div>
-        <script>
-            setTimeout(function() {
-                window.location.href = '${tgURL}';
-            }, 3000);
-        </script>
+      <div class="container">
+        <div class="loader"></div>
+        <h1>Redirecting to <span class="emoji">➡️</span> ${bot} <span class="emoji">🚀</span></h1>
+        <p>Please wait, connecting you in 3 seconds...</p>
+      </div>
     </body>
     </html>
   `);
