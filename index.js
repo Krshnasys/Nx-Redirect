@@ -151,6 +151,11 @@ app.get("/:bot/:token", (req, res) => {
           margin-bottom: 20px;
           filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.3));
           animation: pulseGlow 2s ease-in-out infinite;
+          transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+          transform: scale(1.1);
         }
 
         @keyframes pulseGlow {
@@ -227,12 +232,34 @@ app.get("/:bot/:token", (req, res) => {
           box-shadow: 0 5px 20px rgba(0, 221, 235, 0.4);
           animation: fadeInText 1s ease-out 0.6s forwards;
           opacity: 0;
+          cursor: pointer;
         }
 
         .button:hover {
           transform: translateY(-3px) scale(1.02);
           box-shadow: 0 8px 25px rgba(0, 221, 235, 0.6);
-          background: linear-gradient(90, #7b3cff, #00ddeb);
+          background: linear-gradient(90deg, #7b3cff, #00ddeb);
+        }
+
+        .button:active {
+          transform: translateY(0);
+          box-shadow: 0 3px 15px rgba(0, 221, 235, 0.3);
+        }
+
+        /* Loading Animation */
+        .loading {
+          display: none;
+          width: 40px;
+          height: 40px;
+          margin: 20px auto;
+          border: 4px solid #00ddeb;
+          border-top: 4px solid transparent;
+          border-radius: 50%;
+          animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+          to { transform: rotate(360deg); }
         }
 
         /* Footer */
@@ -264,6 +291,11 @@ app.get("/:bot/:token", (req, res) => {
           right: 20px;
           cursor: pointer;
           font-size: 1.2em;
+          transition: transform 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+          transform: rotate(180deg);
         }
 
         /* Dark Mode Adjustments */
@@ -301,6 +333,12 @@ app.get("/:bot/:token", (req, res) => {
             padding: 12px 30px;
           }
         }
+
+        /* Accessibility */
+        .container:focus {
+          outline: 2px solid #00ddeb;
+          outline-offset: 4px;
+        }
       </style>
       <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
       <script src="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.7.2/dist/vanilla-tilt.min.js"></script>
@@ -309,6 +347,7 @@ app.get("/:bot/:token", (req, res) => {
         const themeToggle = document.createElement('div');
         themeToggle.className = 'theme-toggle';
         themeToggle.innerHTML = '🌙';
+        themeToggle.setAttribute('aria-label', 'Toggle theme');
         document.body.appendChild(themeToggle);
 
         themeToggle.addEventListener('click', () => {
@@ -316,8 +355,9 @@ app.get("/:bot/:token", (req, res) => {
           themeToggle.innerHTML = document.body.classList.contains('light') ? '🌞' : '🌙';
         });
 
-        // Typed.js for Typing Effect
+        // Main Logic
         window.onload = () => {
+          // Typed.js for Typing Effect
           new Typed('.typed-text', {
             strings: ['Redirecting to <strong>${bot}</strong>...'],
             typeSpeed: 50,
@@ -332,26 +372,44 @@ app.get("/:bot/:token", (req, res) => {
             'max-glare': 0.3,
           });
 
-          // Countdown Logic
+          // Countdown and Redirect Logic
           let time = 3;
           const countEl = document.querySelector('.progress-ring span');
+          const loadingEl = document.querySelector('.loading');
+          const buttonEl = document.querySelector('.button');
           const interval = setInterval(() => {
             time--;
-            if (countEl) countEl.textContent = time;
-            if (time === 0) {
+            if (countEl) {
+              countEl.textContent = time; // Update countdown display
+            }
+            if (time <= 0) {
               clearInterval(interval);
-              window.location.href = '${tgURL}';
+              if (loadingEl) loadingEl.style.display = 'block'; // Show loading spinner
+              if (buttonEl) buttonEl.style.pointerEvents = 'none'; // Disable button
+              setTimeout(() => {
+                window.location.href = '${tgURL}'; // Trigger redirect
+              }, 500); // Brief delay for loading animation
             }
           }, 1000);
+
+          // Error Handling for Invalid URL
+          fetch('${tgURL}', { method: 'HEAD', mode: 'no-cors' })
+            .catch(() => {
+              clearInterval(interval);
+              document.querySelector('.typed-text').innerHTML = 'Invalid Telegram URL. Please check the link.';
+              document.querySelector('.progress-ring').style.display = 'none';
+              document.querySelector('.button').style.display = 'none';
+              document.querySelector('.loading').style.display = 'none';
+            });
         };
 
-        // Error Handling for Invalid URL
-        fetch('${tgURL}', { method: 'HEAD' })
-          .catch(() => {
-            document.querySelector('.typed-text').innerHTML = 'Invalid Telegram URL. Please check the link.';
-            document.querySelector('.progress-ring').style.display = 'none';
-            document.querySelector('.button').style.display = 'none';
-          });
+        // Accessibility: Keyboard Navigation
+        document.querySelector('.button').addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            window.location.href = '${tgURL}';
+          }
+        });
       </script>
     </head>
     <body>
@@ -359,7 +417,7 @@ app.get("/:bot/:token", (req, res) => {
         <div></div>
         <div></div>
       </div>
-      <div class="container">
+      <div class="container" tabindex="0">
         <svg class="logo" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15.93V15.5H9.5v2.43c-1.67-.36-3-1.76-3-3.43 0-1.93 1.57-3.5 3.5-3.5h1v-2.43c1.67.36 3 1.76 3 3.43 0 1.93-1.57 3.5-3.5 3.5h-1v2.43zM12 7c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z" fill="#00ddeb"/>
         </svg>
@@ -371,9 +429,10 @@ app.get("/:bot/:token", (req, res) => {
           </svg>
           <span>3</span>
         </div>
-        <a class="button" href="${tgURL}">Join Now</a>
+        <a class="button" href="${tgURL}" role="button" aria-label="Join Telegram bot now">Join Now</a>
+        <div class="loading"></div>
         <div class="footer">
-          Powered by <a href="https://t.me/NxLeech">Nx-Leech</a> ❤️
+          Powered by <a href="https://t.me/NxLeech" aria-label="Visit Nx-Leech Telegram">Nx-Leech</a> ❤️
         </div>
       </div>
     </body>
