@@ -10,8 +10,8 @@ Every part of this projectcan be customized.**
 [![Chrome](https://img.shields.io/badge/Live%20Demo-Open%20in%20Chrome-4285F4?style=flat-square&logo=google-chrome&logoColor=white)](https://nxredirect-428abc69e62a.herokuapp.com/)
 
 ## Screenshots 
-![Homepage Logo](assets/homepage.png)
-![Redirect Logo](assets/Redirect.png)
+![Homepage Logo](assets/homepage.jpg)
+![Redirect Logo](assets/Redirect.jpg)
 
 ## Heroku Deployment (Easy Way)
 1. Fork this repository
