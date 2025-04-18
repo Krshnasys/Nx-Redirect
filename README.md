@@ -1,5 +1,3 @@
----
-
 # Nx-Leech Redirect
 
 ![Nx-Leech Logo](https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg)
