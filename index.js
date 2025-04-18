@@ -63,7 +63,7 @@ app.get("/:bot/:token", (req, res) => {
       <meta property="og:description" content="Join ${bot} on Telegram via Nx-Leech" />
       <meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" />
       <meta property="og:url" content="${tgURL}" />
-      <!-- Fallback redirect for environments blocking JavaScript -->
+      <!-- Fallback redirect for Telegram's in-app browser -->
       <meta http-equiv="refresh" content="5;url=${tgURL}" />
       <title>Nx-Leech | Redirecting to ${bot}</title>
       <link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" type="image/svg+xml" />
@@ -218,7 +218,16 @@ app.get("/:bot/:token", (req, res) => {
           transform: translate(-50%, -50%);
           font-size: 1.2em;
           font-weight: 600;
-          transition: opacity 0.2s ease;
+          transition: transform 0.2s ease, opacity 0.2s ease;
+        }
+
+        .progress-ring span.tick {
+          animation: tick 0.2s ease;
+        }
+
+        @keyframes tick {
+          0% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.7; }
+          100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
         }
 
         /* Gradient Button with Ripple Effect */
@@ -273,8 +282,6 @@ app.get("/:bot/:token", (req, res) => {
           border: 4px solid #00ddeb;
           border-top: 4px solid transparent;
           border-radius: 50%;
-          animation: spin 1s linear infinite;
-          opacity: 0;
           animation: spin 1s linear infinite, fadeIn 0.3s ease forwards;
         }
 
@@ -301,6 +308,7 @@ app.get("/:bot/:token", (req, res) => {
           color: #ffd700;
           font-size: 0.9em;
           margin: 10px 0;
+          word-break: break-all;
         }
 
         /* Footer */
@@ -381,162 +389,6 @@ app.get("/:bot/:token", (req, res) => {
           outline-offset: 4px;
         }
       </style>
-      <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
-      <script src="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.7.2/dist/vanilla-tilt.min.js"></script>
-      <script>
-        // Theme Toggle
-        const themeToggle = document.createElement('div');
-        themeToggle.className = 'theme-toggle';
-        themeToggle.innerHTML = '🌙';
-        themeToggle.setAttribute('aria-label', 'Toggle theme');
-        document.body.appendChild(themeToggle);
-
-        themeToggle.addEventListener('click', () => {
-          document.body.classList.toggle('light');
-          themeToggle.innerHTML = document.body.classList.contains('light') ? '🌞' : '🌙';
-        });
-
-        // Main Logic
-        window.onload = () => {
-          console.log('Page loaded, initializing...'); // Debug: Confirm script start
-
-          // Typed.js for Typing Effect
-          try {
-            new Typed('.typed-text', {
-              strings: ['Redirecting to <strong>${bot}</strong>...'],
-              typeSpeed: 50,
-              showCursor: false,
-            });
-            console.log('Typed.js initialized');
-          } catch (err) {
-            console.error('Typed.js error:', err);
-            document.querySelector('.typed-text').textContent = 'Redirecting to ${bot}...';
-          }
-
-          // VanillaTilt for 3D Card Effect
-          try {
-            VanillaTilt.init(document.querySelector('.container'), {
-              max: 15,
-              speed: 400,
-              glare: true,
-              'max-glare': 0.3,
-            });
-            console.log('VanillaTilt initialized');
-          } catch (err) {
-            console.error('VanillaTilt error:', err);
-          }
-
-          // Countdown and Redirect Logic
-          const countEl = document.querySelector('.progress-ring span');
-          const loadingEl = document.querySelector('.loading');
-          const buttonEl = document.querySelector('.button');
-          const errorEl = document.querySelector('.error');
-          const debugEl = document.querySelector('.debug');
-          let time = 3;
-
-          if (!countEl) {
-            console.error('Countdown element not found');
-            document.querySelector('.typed-text').textContent = 'Error: Countdown failed';
-            return;
-          }
-
-          console.log('Starting countdown:', time);
-          countEl.textContent = time; // Initialize countdown display
-
-          const interval = setInterval(() => {
-            time--;
-            console.log('Countdown tick:', time); // Debug: Log each tick
-            
-            if (countEl) {
-              countEl.textContent = time; // Update countdown display
-              countEl.style.opacity = '0.7'; // Subtle fade effect
-              setTimeout(() => { countEl.style.opacity = '1'; }, 100);
-            }
-
-            if (time <= 0) {
-              clearInterval(interval);
-              console.log('Countdown finished, attempting redirect'); // Debug: Log redirect attempt
-              
-              if (loadingEl) loadingEl.style.display = 'block'; // Show loading spinner
-              if (buttonEl) buttonEl.style.pointerEvents = 'none'; // Disable button
-              
-              try {
-                console.log('Redirecting to:', '${tgURL}');
-                window.location.assign('${tgURL}'); // Use assign for compatibility
-              } catch (err) {
-                console.error('Redirect failed:', err);
-                if (errorEl) {
-                  errorEl.textContent = 'Redirect failed. Please click Join Now.';
-                  errorEl.style.display = 'block';
-                }
-                if (debugEl) {
-                  debugEl.textContent = 'Debug: Redirect error - ' + err.message;
-                  debugEl.style.display = 'block';
-                }
-                if (loadingEl) loadingEl.style.display = 'none';
-                if (buttonEl) buttonEl.style.pointerEvents = 'auto';
-              }
-            }
-          }, 1000);
-
-          // Fallback Timeout for Redirect
-          setTimeout(() => {
-            if (document.querySelector('.loading').style.display !== 'block') {
-              console.warn('Fallback redirect triggered');
-              if (errorEl) {
-                errorEl.textContent = 'Auto-redirect failed. Please click Join Now.';
-                errorEl.style.display = 'block';
-              }
-              if (debugEl) {
-                debugEl.textContent = 'Debug: Fallback redirect triggered';
-                debugEl.style.display = 'block';
-              }
-              if (buttonEl) buttonEl.style.pointerEvents = 'auto';
-            }
-          }, 5000);
-
-          // Error Handling for Invalid URL
-          fetch('${tgURL}', { method: 'HEAD', mode: 'no-cors' })
-            .catch((err) => {
-              console.error('Invalid Telegram URL:', err);
-              clearInterval(interval);
-              if (errorEl) {
-                errorEl.textContent = 'Invalid Telegram URL. Please check the link.';
-                errorEl.style.display = 'block';
-              }
-              if (debugEl) {
-                debugEl.textContent = 'Debug: Invalid URL - ' + err.message;
-                debugEl.style.display = 'block';
-              }
-              document.querySelector('.progress-ring').style.display = 'none';
-              document.querySelector('.button').style.display = 'none';
-              document.querySelector('.loading').style.display = 'none';
-            });
-
-          // Ripple Effect for Button
-          buttonEl.addEventListener('click', (e) => {
-            console.log('Button clicked, manual redirect');
-            const ripple = document.createElement('span');
-            ripple.className = 'ripple';
-            const rect = buttonEl.getBoundingClientRect();
-            const size = Math.max(rect.width, rect.height);
-            ripple.style.width = ripple.style.height = size + 'px';
-            ripple.style.left = e.clientX - rect.left - size / 2 + 'px';
-            ripple.style.top = e.clientY - rect.top - size / 2 + 'px';
-            buttonEl.appendChild(ripple);
-            setTimeout(() => ripple.remove(), 600);
-          });
-        };
-
-        // Accessibility: Keyboard Navigation
-        document.querySelector('.button').addEventListener('keydown', (e) => {
-          if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault();
-            console.log('Keyboard redirect triggered');
-            window.location.assign('${tgURL}');
-          }
-        });
-      </script>
     </head>
     <body>
       <div class="parallax-bg">
@@ -563,6 +415,178 @@ app.get("/:bot/:token", (req, res) => {
           Powered by <a href="https://t.me/NxLeech" aria-label="Visit Nx-Leech Telegram">Nx-Leech</a> ❤️
         </div>
       </div>
+      <script>
+        // Debug Utility: Show messages on-screen and in console
+        function debug(message) {
+          console.log(message);
+          const debugEl = document.querySelector('.debug');
+          if (debugEl) {
+            debugEl.textContent = 'Debug: ' + message;
+            debugEl.style.display = 'block';
+          }
+        }
+
+        // Theme Toggle
+        debug('Initializing theme toggle');
+        const themeToggle = document.createElement('div');
+        themeToggle.className = 'theme-toggle';
+        themeToggle.innerHTML = '🌙';
+        themeToggle.setAttribute('aria-label', 'Toggle theme');
+        document.body.appendChild(themeToggle);
+
+        themeToggle.addEventListener('click', () => {
+          document.body.classList.toggle('light');
+          themeToggle.innerHTML = document.body.classList.contains('light') ? '🌞' : '🌙';
+          debug('Theme toggled');
+        });
+
+        // Main Logic
+        debug('Page loaded, starting initialization');
+        
+        // Load Typed.js and VanillaTilt asynchronously
+        const loadScripts = () => {
+          const typedScript = document.createElement('script');
+          typedScript.src = 'https://cdn.jsdelivr.net/npm/typed.js@2.0.12';
+          typedScript.async = true;
+          typedScript.onload = () => {
+            debug('Typed.js loaded');
+            try {
+              new Typed('.typed-text', {
+                strings: ['Redirecting to <strong>${bot}</strong>...'],
+                typeSpeed: 50,
+                showCursor: false,
+              });
+              debug('Typed.js initialized');
+            } catch (err) {
+              debug('Typed.js error: ' + err.message);
+              document.querySelector('.typed-text').textContent = 'Redirecting to ${bot}...';
+            }
+          };
+          typedScript.onerror = () => debug('Typed.js failed to load');
+          document.head.appendChild(typedScript);
+
+          const tiltScript = document.createElement('script');
+          tiltScript.src = 'https://cdn.jsdelivr.net/npm/vanilla-tilt@1.7.2/dist/vanilla-tilt.min.js';
+          tiltScript.async = true;
+          tiltScript.onload = () => {
+            debug('VanillaTilt loaded');
+            try {
+              VanillaTilt.init(document.querySelector('.container'), {
+                max: 15,
+                speed: 400,
+                glare: true,
+                'max-glare': 0.3,
+              });
+              debug('VanillaTilt initialized');
+            } catch (err) {
+              debug('VanillaTilt error: ' + err.message);
+            }
+          };
+          tiltScript.onerror = () => debug('VanillaTilt failed to load');
+          document.head.appendChild(tiltScript);
+        };
+
+        // Countdown and Redirect Logic
+        const startCountdown = () => {
+          const countEl = document.querySelector('.progress-ring span');
+          const loadingEl = document.querySelector('.loading');
+          const buttonEl = document.querySelector('.button');
+          const errorEl = document.querySelector('.error');
+          let time = 3;
+
+          if (!countEl) {
+            debug('Error: Countdown element not found');
+            errorEl.textContent = 'Error: Countdown failed. Please click Join Now.';
+            errorEl.style.display = 'block';
+            return;
+          }
+
+          debug('Starting countdown: ' + time);
+          countEl.textContent = time;
+
+          const interval = setInterval(() => {
+            time--;
+            debug('Countdown tick: ' + time);
+            
+            if (countEl) {
+              countEl.textContent = time;
+              countEl.classList.remove('tick');
+              void countEl.offsetWidth; // Force reflow for animation
+              countEl.classList.add('tick');
+            }
+
+            if (time <= 0) {
+              clearInterval(interval);
+              debug('Countdown finished, attempting redirect');
+              
+              if (loadingEl) loadingEl.style.display = 'block';
+              if (buttonEl) buttonEl.style.pointerEvents = 'none';
+              
+              try {
+                debug('Redirecting to: ${tgURL}');
+                window.location.assign('${tgURL}'); // Primary redirect
+                window.location.href = '${tgURL}'; // Fallback
+                window.open('${tgURL}', '_blank'); // Telegram browser fallback
+              } catch (err) {
+                debug('Redirect failed: ' + err.message);
+                errorEl.textContent = 'Redirect failed. Please click Join Now.';
+                errorEl.style.display = 'block';
+                loadingEl.style.display = 'none';
+                buttonEl.style.pointerEvents = 'auto';
+              }
+            }
+          }, 1000);
+
+          // Fallback Timeout
+          setTimeout(() => {
+            if (document.querySelector('.loading').style.display !== 'block') {
+              debug('Fallback redirect triggered');
+              errorEl.textContent = 'Auto-redirect failed. Please click Join Now.';
+              errorEl.style.display = 'block';
+              buttonEl.style.pointerEvents = 'auto';
+            }
+          }, 5000);
+        };
+
+        // Initialize
+        debug('Initializing scripts and countdown');
+        loadScripts();
+        startCountdown();
+
+        // Validate Telegram URL
+        fetch('${tgURL}', { method: 'HEAD', mode: 'no-cors' })
+          .catch((err) => {
+            debug('Invalid Telegram URL: ' + err.message);
+            document.querySelector('.error').textContent = 'Invalid Telegram URL. Please check the link.';
+            document.querySelector('.error').style.display = 'block';
+            document.querySelector('.progress-ring').style.display = 'none';
+            document.querySelector('.button').style.display = 'none';
+            document.querySelector('.loading').style.display = 'none';
+          });
+
+        // Ripple Effect and Keyboard Navigation
+        const buttonEl = document.querySelector('.button');
+        buttonEl.addEventListener('click', (e) => {
+          debug('Button clicked, manual redirect');
+          const ripple = document.createElement('span');
+          ripple.className = 'ripple';
+          const rect = buttonEl.getBoundingClientRect();
+          const size = Math.max(rect.width, rect.height);
+          ripple.style.width = ripple.style.height = size + 'px';
+          ripple.style.left = e.clientX - rect.left - size / 2 + 'px';
+          ripple.style.top = e.clientY - rect.top - size / 2 + 'px';
+          buttonEl.appendChild(ripple);
+          setTimeout(() => ripple.remove(), 600);
+        });
+
+        buttonEl.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            debug('Keyboard redirect triggered');
+            window.location.assign('${tgURL}');
+          }
+        });
+      </script>
     </body>
     </html>
   `);
