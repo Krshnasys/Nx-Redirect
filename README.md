@@ -3,7 +3,12 @@
 [![Node.js](https://img.shields.io/badge/Node.js-v18.20.8-green?style=flat-square&logo=node.js)](https://nodejs.org/)
 [![Express](https://img.shields.io/badge/Express-v4.18.2-blue?style=flat-square&logo=express)](https://expressjs.com/)
 
-**Nx-Leech Redirect** is a simple web app built with Node.js and Express, featuring a modern homepage with a particle background, a floating GitHub icon, and an animated tagline. Deployed on Heroku, it’s perfect for creating a landing page for Telegram-based services. You can easily customize it with your own text, links, and branding.
+**Nx-Leech Redirect** is a customizable and Heroku-deployable Redirect Web Page project designed for seamless redirection across various platforms including Telegram bots, URL shorteners, or any service where redirection is required. It includes a stylish homepage and a dedicated redirect page, giving users full control over their redirection flow.
+
+Whether you're managing a TG bot, creating short links redirection, or integrating redirection into any other service, this project allows you to deploy your own branded redirect page with ease. You can also connect a custom domain for a more professional and personalized experience.
+
+Every part of this project—from the design to the redirect logic—can be customized to fit your specific needs, allowing complete control over how your redirection looks and functions.
+
 
 ## Features
 
