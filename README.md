@@ -22,7 +22,15 @@ Every part of this project—from the design to the redirect logic—can be cust
 - **Heroku CLI**: [Install](https://devcenter.heroku.com/articles/heroku-cli)
 - **Heroku Account**: Sign up at [Heroku](https://www.heroku.com/)
 
-## Installation
+## Deployment (Easy Way)
+1. Fork this repository
+2. Click the Heroku button above
+3. Set app name, and deploy
+4. scale up dynos 
+5. Optionally add your custom domain from Heroku dashboard
+   
+##Deployment (Hard way)
+# Installation
 
 1. **Clone the Repository**:
    ```bash
