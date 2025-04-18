@@ -10,7 +10,7 @@ app.get("/", (req, res) => {
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <meta name="description" content="Nx-Leech: Your Telegram bot ecosystem" />
       <meta property="og:title" content="Nx-Leech | Home" />
-      <meta property="og:description" content="Join Nx-Leech, the ultimate Telegram bot ecosystem, made with ❤️🚀" />
+      <meta property="og:description" content="Join Nx-Leech, the ultimate Telegram bot ecosystem, devloped by Nx Leech 🔰" />
       <meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" />
       <meta property="og:url" content="https://nxredirect-428abc69e62a.herokuapp.com/" />
       <title>Nx-Leech | Home</title>
@@ -302,11 +302,11 @@ app.get("/", (req, res) => {
           <path d="M24 4L30 18H44L34 28L38 44L24 36L10 44L14 28L4 18H18L24 4Z" fill="#00ddeb"/>
           <path d="M24 12L28 20H36L30 26L32 34L24 30L16 34L18 26L12 20H20L24 12Z" fill="#fff"/>
         </svg>
-        <h1>Welcome to Nx-Leech ❤️🚀</h1>
+        <h1>Welcome to Nx-Leech 🧩</h1>
         <div class="typed-text"></div>
         <a class="button" href="https://t.me/NxLeech" role="button" aria-label="Join Nx-Leech on Telegram">Join Nx-Leech</a>
         <div class="footer">
-          Made with ❤️ by <a href="https://t.me/NxLeech" aria-label="Visit Nx-Leech Telegram">Nx-Leech</a>
+          devloped by 🔮 <a href="https://t.me/NxLeech" aria-label="Visit Nx-Leech Telegram">Nx-Leech</a>
         </div>
       </div>
       <script>
