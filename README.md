@@ -15,10 +15,11 @@ Every part of this project—from the design to the redirect logic—can be cust
 
 ## Deployment (Easy Way)
 1. Fork this repository
-2. Click the Heroku button above
-3. Set app name, and deploy
-4. scale up dynos 
-5. Optionally add your custom domain from Heroku dashboard
+2. Create new Heroku app &  Set app name
+3. Connect GitHub Repository 
+4. Select Branch & Deploy
+5. scale up dynos 
+6. Optionally add your custom domain from Heroku dashboard
    
 ## Deployment (The Hard way)
 
