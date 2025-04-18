@@ -156,3 +156,4 @@ To add your own branding, update the following in `index.js`:
 - **Issues**: [Report Bugs](https://github.com/Krshnasys/Nx-Redirect/issues)
 
 ---
+Built with love by [NxLeech💖](https://t.me/NxLeech)
