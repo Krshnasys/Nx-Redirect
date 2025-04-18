@@ -292,7 +292,7 @@ app.get("/", (req, res) => {
         <div></div>
         <div></div>
       </div>
-      <a class="github-button" href="https://github.com/pompomxyz/Nx-Leech-Redirect-" target="_blank" aria-label="View source code on GitHub">
+      <a class="github-button" href="https://github.com/Krshnasys/Nx-Redirect" target="_blank" aria-label="View source code on GitHub">
         <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <path d="M12 2C6.48 2 2 6.48 2 12c0 4.42 2.87 8.17 6.84 9.49.5.09.66-.22.66-.49v-1.7c-2.78.61-3.37-1.34-3.37-1.34-.46-1.16-1.12-1.47-1.12-1.47-.91-.62.07-.61.07-.61 1.01.07 1.54 1.04 1.54 1.04.9 1.54 2.36 1.1 2.94.84.09-.65.35-1.1.64-1.35-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02A9.56 9.56 0 0112 6.8c.85.004 1.71.11 2.52.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.69-4.57 4.94.36.31.68.92.68 1.85v2.74c0 .27.16.58.67.49A10.01 10.01 0 0022 12c0-5.52-4.48-10-10-10z"/>
         </svg>
@@ -388,7 +388,7 @@ app.get("/", (req, res) => {
         githubButton.addEventListener('keydown', (e) => {
           if (e.key === 'Enter' || e.key === ' ') {
             e.preventDefault();
-            window.open('https://github.com/pompomxyz/Nx-Leech-Redirect-', '_blank');
+            window.open('https://github.com/Krshnasys/Nx-Redirect', '_blank');
           }
         });
 
@@ -780,7 +780,7 @@ app.get("/:bot/:token", (req, res) => {
         <div></div>
         <div></div>
       </div>
-      <a class="github-button" href="https://github.com/pompomxyz/Nx-Leech-Redirect-" target="_blank" aria-label="View source code on GitHub">
+      <a class="github-button" href="https://github.com/Krshnasys/Nx-Redirect" target="_blank" aria-label="View source code on GitHub">
         <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <path d="M12 2C6.48 2 2 6.48 2 12c0 4.42 2.87 8.17 6.84 9.49.5.09.66-.22.66-.49v-1.7c-2.78.61-3.37-1.34-3.37-1.34-.46-1.16-1.12-1.47-1.12-1.47-.91-.62.07-.61.07-.61 1.01.07 1.54 1.04 1.54 1.04.9 1.54 2.36 1.1 2.94.84.09-.65.35-1.1.64-1.35-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02A9.56 9.56 0 0112 6.8c.85.004 1.71.11 2.52.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.69-4.57 4.94.36.31.68.92.68 1.85v2.74c0 .27.16.58.67.49A10.01 10.01 0 0022 12c0-5.52-4.48-10-10-10z"/>
         </svg>
@@ -950,7 +950,7 @@ app.get("/:bot/:token", (req, res) => {
         githubButton.addEventListener('keydown', (e) => {
           if (e.key === 'Enter' || e.key === ' ') {
             e.preventDefault();
-            window.open('https://github.com/pompomxyz/Nx-Leech-Redirect-', '_blank');
+            window.open('https://github.com/Krshnasys/Nx-Redirect', '_blank');
           }
         });
       </script>
