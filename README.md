@@ -61,9 +61,8 @@ Install CLI using official docs: https://devcenter.heroku.com/articles/heroku-cl
 7. **Test**:
    - Visit `https://your-app-name.herokuapp.com/`.
    - Check `https://your-app-name.herokuapp.com/health`.
-8. **Extras**
 
-## Deploy Local 
+## Deploy Locally 
 
 ## Prerequisites
 
