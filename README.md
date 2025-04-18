@@ -15,7 +15,7 @@ Every part of this project—from the design to the redirect logic—can be cust
 
 ## Deployment (Easy Way)
 1. Fork this repository
-2. Create new Heroku app &  Set app name
+2. Create new Heroku app & set app name
 3. Connect GitHub Repository 
 4. Select Branch & Deploy
 5. scale up dynos 
