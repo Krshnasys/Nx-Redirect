@@ -6,23 +6,22 @@ app.get("/", (req, res) => {
     <!DOCTYPE html>
     <html lang="en">
     <head>
-      <meta charset="UTF-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <meta name="description" content="Nx-Leech: Your Telegram bot ecosystem" />
-      <meta property="og:title" content="Nx-Leech | Home" />
-      <meta property="og:description" content="Join Nx-Leech, the ultimate Telegram bot ecosystem, made with ❤️🚀" />
-      <meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" />
-      <meta property="og:url" content="https://nxredirect-428abc69e62a.herokuapp.com/" />
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="description" content="Nx-Leech: Free mirror and leech services">
+      <meta property="og:title" content="Nx-Leech | Home">
+      <meta property="og:description" content="Join Nx-Leech for 24/7 free mirror and leech services, built with ❤️🚀">
+      <meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg">
+      <meta property="og:url" content="https://nxredirect-428abc69e62a.herokuapp.com/">
       <title>Nx-Leech | Home</title>
-      <link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" type="image/svg+xml" />
-      <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+      <link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" type="image/svg+xml">
+      <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
       <style>
         * {
           margin: 0;
           padding: 0;
           box-sizing: border-box;
         }
-
         body {
           font-family: 'Inter', sans-serif;
           background: linear-gradient(45deg, #1e1b4b, #3b2f7a);
@@ -36,13 +35,11 @@ app.get("/", (req, res) => {
           color: #fff;
           position: relative;
         }
-
         @keyframes gradientShift {
           0% { background-position: 0% 50%; }
           50% { background-position: 100% 50%; }
           100% { background-position: 0% 50%; }
         }
-
         canvas {
           position: absolute;
           top: 0;
@@ -52,7 +49,6 @@ app.get("/", (req, res) => {
           z-index: 1;
           pointer-events: none;
         }
-
         .container {
           background: rgba(255, 255, 255, 0.05);
           backdrop-filter: blur(12px);
@@ -67,12 +63,10 @@ app.get("/", (req, res) => {
           z-index: 2;
           animation: slideIn 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
         }
-
         @keyframes slideIn {
           from { opacity: 0; transform: translateY(50px) scale(0.95); }
           to { opacity: 1; transform: translateY(0) scale(1); }
         }
-
         .logo {
           width: 120px;
           height: auto;
@@ -81,16 +75,13 @@ app.get("/", (req, res) => {
           animation: pulseGlow 2s ease-in-out infinite;
           transition: transform 0.3s ease;
         }
-
         .logo:hover {
           transform: scale(1.1);
         }
-
         @keyframes pulseGlow {
           0%, 100% { transform: scale(1); opacity: 1; }
           50% { transform: scale(1.05); opacity: 0.9; }
         }
-
         h1 {
           font-size: 2.5em;
           font-weight: 700;
@@ -98,14 +89,12 @@ app.get("/", (req, res) => {
           animation: fadeInText 1s ease-out 0.3s forwards;
           opacity: 0;
         }
-
         .typed-text {
           font-size: 1.3em;
           color: #b0b8ff;
           margin: 20px 0;
           min-height: 24px;
         }
-
         .button {
           position: relative;
           display: inline-block;
@@ -123,18 +112,15 @@ app.get("/", (req, res) => {
           cursor: pointer;
           overflow: hidden;
         }
-
         .button:hover {
           transform: translateY(-3px) scale(1.02);
           box-shadow: 0 8px 25px rgba(0, 221, 235, 0.6);
           background: linear-gradient(90deg, #7b3cff, #00ddeb);
         }
-
         .button:active {
           transform: translateY(0);
           box-shadow: 0 3px 15px rgba(0, 221, 235, 0.3);
         }
-
         .button .ripple {
           position: absolute;
           background: rgba(255, 255, 255, 0.3);
@@ -143,11 +129,9 @@ app.get("/", (req, res) => {
           animation: rippleEffect 0.6s linear;
           pointer-events: none;
         }
-
         @keyframes rippleEffect {
           to { transform: scale(4); opacity: 0; }
         }
-
         .footer {
           margin-top: 20px;
           font-size: 0.9em;
@@ -155,20 +139,16 @@ app.get("/", (req, res) => {
           animation: fadeInText 1s ease-out 0.9s forwards;
           opacity: 0;
         }
-
         .footer a {
           color: #00ddeb;
           text-decoration: none;
         }
-
         .footer a:hover {
           text-decoration: underline;
         }
-
         @keyframes fadeInText {
           to { opacity: 1; }
         }
-
         .theme-toggle {
           position: absolute;
           top: 20px;
@@ -178,11 +158,9 @@ app.get("/", (req, res) => {
           transition: transform 0.3s ease;
           z-index: 3;
         }
-
         .theme-toggle:hover {
           transform: rotate(180deg);
         }
-
         .github-button {
           position: fixed;
           top: 20px;
@@ -199,44 +177,36 @@ app.get("/", (req, res) => {
           z-index: 3;
           text-decoration: none;
         }
-
         .github-button:hover {
           transform: scale(1.1);
           background: linear-gradient(45deg, #444d56, #00ddeb);
           box-shadow: 0 6px 16px rgba(0, 221, 235, 0.6);
         }
-
         .github-button:focus {
           outline: 2px solid #00ddeb;
           outline-offset: 2px;
         }
-
         .github-button svg {
           width: 24px;
           height: 24px;
           fill: #fff;
         }
-
         @keyframes float {
           0%, 100% { transform: translateY(0); }
           50% { transform: translateY(-5px); }
         }
-
         body.light {
           background: linear-gradient(45deg, #e0e7ff, #f3e8ff);
         }
-
         body.light .container {
           background: rgba(255, 255, 255, 0.8);
           border: 1px solid rgba(0, 0, 0, 0.1);
         }
-
         body.light .typed-text,
         body.light h1,
         body.light .footer {
           color: #1e1b4b;
         }
-
         @media (max-width: 600px) {
           .container {
             padding: 30px;
@@ -255,7 +225,6 @@ app.get("/", (req, res) => {
             top: 15px;
           }
         }
-
         .container:focus {
           outline: 2px solid #00ddeb;
           outline-offset: 4px;
@@ -282,132 +251,143 @@ app.get("/", (req, res) => {
         </div>
       </div>
       <script>
-        const themeToggle = document.createElement('div');
-        themeToggle.className = 'theme-toggle';
-        themeToggle.innerHTML = '🌙';
-        themeToggle.setAttribute('aria-label', 'Toggle theme');
-        document.body.appendChild(themeToggle);
+        try {
+          const themeToggle = document.createElement('div');
+          themeToggle.className = 'theme-toggle';
+          themeToggle.innerHTML = '🌙';
+          themeToggle.setAttribute('aria-label', 'Toggle theme');
+          document.body.appendChild(themeToggle);
 
-        themeToggle.addEventListener('click', () => {
-          document.body.classList.toggle('light');
-          themeToggle.innerHTML = document.body.classList.contains('light') ? '🌞' : '🌙';
-        });
-
-        const loadScripts = () => {
-          const typedScript = document.createElement('script');
-          typedScript.src = 'https://cdn.jsdelivr.net/npm/typed.js@2.0.12';
-          typedScript.async = true;
-          typedScript.onload = () => {
-            try {
-              new Typed('.typed-text', {
-                strings: ['24/7 Free Mirror and Leech Services', 'Built with Nx Leech 🔧♨️'],
-                typeSpeed: 50,
-                backSpeed: 30,
-                backDelay: 2000,
-                loop: true,
-                showCursor: false,
-              });
-            } catch (err) {
-              document.querySelector('.typed-text').textContent = '24/7 Free Mirror and Leech Services';
-            }
-          };
-          typedScript.onerror = () => {
-            document.querySelector('.typed-text').textContent = '24/7 Free Mirror and Leech Services';
-          };
-          document.head.appendChild(typedScript);
-
-          const tiltScript = document.createElement('script');
-          tiltScript.src = 'https://cdn.jsdelivr.net/npm/vanilla-tilt@1.7.2/dist/vanilla-tilt.min.js';
-          tiltScript.async = true;
-          tiltScript.onload = () => {
-            try {
-              VanillaTilt.init(document.querySelector('.container'), {
-                max: 15,
-                speed: 400,
-                glare: true,
-                'max-glare': 0.3,
-              });
-            } catch (err) {}
-          };
-          document.head.appendChild(tiltScript);
-        };
-
-        const buttonEl = document.querySelector('.button');
-        buttonEl.addEventListener('click', (e) => {
-          const ripple = document.createElement('span');
-          ripple.className = 'ripple';
-          const rect = buttonEl.getBoundingClientRect();
-          const size = Math.max(rect.width, rect.height);
-          ripple.style.width = ripple.style.height = size + 'px';
-          ripple.style.left = e.clientX - rect.left - size / 2 + 'px';
-          ripple.style.top = e.clientY - rect.top - size / 2 + 'px';
-          buttonEl.appendChild(ripple);
-          setTimeout(() => ripple.remove(), 600);
-        });
-
-        buttonEl.addEventListener('keydown', (e) => {
-          if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault();
-            window.location.assign('https://t.me/NxLeech');
-          }
-        });
-
-        const githubButton = document.querySelector('.github-button');
-        githubButton.addEventListener('keydown', (e) => {
-          if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault();
-            window.open('https://github.com/pompomxyz/Nx-Leech-Redirect-', '_blank');
-          }
-        });
-
-        function initParticles() {
-          const canvas = document.getElementById('particle-canvas');
-          const ctx = canvas.getContext('2d');
-          canvas.width = window.innerWidth;
-          canvas.height = window.innerHeight;
-
-          const particles = [];
-          const particleCount = 30;
-
-          for (let i = 0; i < particleCount; i++) {
-            particles.push({
-              x: Math.random() * canvas.width,
-              y: Math.random() * canvas.height,
-              radius: Math.random() * 2 + 1,
-              speedX: (Math.random() - 0.5) * 0.5,
-              speedY: (Math.random() - 0.5) * 0.5,
-              opacity: Math.random() * 0.5 + 0.3,
-            });
-          }
-
-          function animate() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            particles.forEach(particle => {
-              particle.x += particle.speedX;
-              particle.y += particle.speedY;
-              particle.opacity = Math.sin(Date.now() * 0.002 + particle.x) * 0.3 + 0.5;
-
-              if (particle.x < 0 || particle.x > canvas.width) particle.speedX *= -1;
-              if (particle.y < 0 || particle.y > canvas.height) particle.speedY *= -1;
-
-              ctx.beginPath();
-              ctx.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2);
-              ctx.fillStyle = `rgba(0, 221, 235, ${particle.opacity})`;
-              ctx.fill();
-            });
-            requestAnimationFrame(animate);
-          }
-
-          window.addEventListener('resize', () => {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
+          themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('light');
+            themeToggle.innerHTML = document.body.classList.contains('light') ? '🌞' : '🌙';
           });
 
-          animate();
-        }
+          const loadScripts = () => {
+            const typedScript = document.createElement('script');
+            typedScript.src = 'https://cdn.jsdelivr.net/npm/typed.js@2.0.12';
+            typedScript.async = true;
+            typedScript.onload = () => {
+              try {
+                new Typed('.typed-text', {
+                  strings: ['24/7 Free Mirror and Leech Services', 'Built with Nx Leech 🔧♨️'],
+                  typeSpeed: 50,
+                  backSpeed: 30,
+                  backDelay: 2000,
+                  loop: true,
+                  showCursor: false
+                });
+              } catch (err) {
+                console.error('Typed.js error:', err.message);
+                document.querySelector('.typed-text').textContent = '24/7 Free Mirror and Leech Services';
+              }
+            };
+            typedScript.onerror = () => {
+              console.error('Failed to load Typed.js');
+              document.querySelector('.typed-text').textContent = '24/7 Free Mirror and Leech Services';
+            };
+            document.head.appendChild(typedScript);
 
-        loadScripts();
-        initParticles();
+            const tiltScript = document.createElement('script');
+            tiltScript.src = 'https://cdn.jsdelivr.net/npm/vanilla-tilt@1.7.2/dist/vanilla-tilt.min.js';
+            tiltScript.async = true;
+            tiltScript.onload = () => {
+              try {
+                VanillaTilt.init(document.querySelector('.container'), {
+                  max: 15,
+                  speed: 400,
+                  glare: true,
+                  'max-glare': 0.3
+                });
+              } catch (err) {
+                console.error('VanillaTilt error:', err.message);
+              }
+            };
+            tiltScript.onerror = () => {
+              console.error('Failed to load VanillaTilt');
+            };
+            document.head.appendChild(tiltScript);
+          };
+
+          const buttonEl = document.querySelector('.button');
+          buttonEl.addEventListener('click', (e) => {
+            const ripple = document.createElement('span');
+            ripple.className = 'ripple';
+            const rect = buttonEl.getBoundingClientRect();
+            const size = Math.max(rect.width, rect.height);
+            ripple.style.width = ripple.style.height = size + 'px';
+            ripple.style.left = e.clientX - rect.left - size / 2 + 'px';
+            ripple.style.top = e.clientY - rect.top - size / 2 + 'px';
+            buttonEl.appendChild(ripple);
+            setTimeout(() => ripple.remove(), 600);
+          });
+
+          buttonEl.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              window.location.assign('https://t.me/NxLeech');
+            }
+          });
+
+          const githubButton = document.querySelector('.github-button');
+          githubButton.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              window.open('https://github.com/pompomxyz/Nx-Leech-Redirect-', '_blank');
+            }
+          });
+
+          function initParticles() {
+            const canvas = document.getElementById('particle-canvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+
+            const particles = [];
+            const particleCount = 30;
+
+            for (let i = 0; i < particleCount; i++) {
+              particles.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                radius: Math.random() * 2 + 1,
+                speedX: (Math.random() - 0.5) * 0.5,
+                speedY: (Math.random() - 0.5) * 0.5,
+                opacity: Math.random() * 0.5 + 0.3
+              });
+            }
+
+            function animate() {
+              ctx.clearRect(0, 0, canvas.width, canvas.height);
+              particles.forEach(particle => {
+                particle.x += particle.speedX;
+                particle.y += particle.speedY;
+                particle.opacity = Math.sin(Date.now() * 0.002 + particle.x) * 0.3 + 0.5;
+
+                if (particle.x < 0 || particle.x > canvas.width) particle.speedX *= -1;
+                if (particle.y < 0 || particle.y > canvas.height) particle.speedY *= -1;
+
+                ctx.beginPath();
+                ctx.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(0, 221, 235, ${particle.opacity})`;
+                ctx.fill();
+              });
+              requestAnimationFrame(animate);
+            }
+
+            window.addEventListener('resize', () => {
+              canvas.width = window.innerWidth;
+              canvas.height = window.innerHeight;
+            });
+
+            animate();
+          }
+
+          loadScripts();
+          initParticles();
+        } catch (err) {
+          console.error('Script error:', err.message);
+        }
       </script>
     </body>
     </html>
