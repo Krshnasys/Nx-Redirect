@@ -10,6 +10,8 @@ Whether you're managing a TG bot, creating short links redirection, or integrati
 
 Every part of this project—from the design to the redirect logic—can be customized to fit your specific needs, allowing complete control over how your redirection looks and functions.
 
+[![Chrome](https://img.shields.io/badge/Live%20Demo-Open%20in%20Chrome-4285F4?style=flat-square&logo=google-chrome&logoColor=white)](https://nxredirect-428abc69e62a.herokuapp.com/)
+
 ## Screenshots 
 ![Homepage Logo](assets/homepage.png)
 ![Redirect Logo](assets/Redirect.png)
