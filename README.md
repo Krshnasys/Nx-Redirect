@@ -18,15 +18,9 @@
 - **Health Check**: `/health` endpoint returns “Health check: OK”.
 - **Customizable**: Update text, links, and logos for your project.
 
-## Current Structure
-
-```
-Nx-Leech-Redirect-/
-├── index.js        # Main Express application
-├── Procfile        # Heroku process configuration
-├── package.json    # Project metadata and dependencies
-└── README.md       # Project documentation
-```
+## Screenshots 
+![Homepage Logo](assets/homepage.png)
+![Redirect Logo](assets/Redirect.png)
 
 ## Prerequisites
 
