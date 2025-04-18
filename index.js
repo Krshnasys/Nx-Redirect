@@ -1,6 +1,10 @@
 const express = require("express");
 const app = express();
 
+//const express = require('express');
+//const app = express();
+//const port = process.env.PORT || 3000;
+
 app.get("/", (req, res) => {
   res.send(`
     <!DOCTYPE html>
@@ -43,8 +47,7 @@ app.get("/", (req, res) => {
           100% { background-position: 0% 50%; }
         }
 
-        /* Parallax Background Layers */
-        .parallax-bg {
+        canvas {
           position: absolute;
           top: 0;
           left: 0;
@@ -54,27 +57,6 @@ app.get("/", (req, res) => {
           pointer-events: none;
         }
 
-        .parallax-bg div {
-          position: absolute;
-          width: 100%;
-          height: 100%;
-          background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
-          opacity: 0.3;
-          animation: floatLayer 20s linear infinite;
-        }
-
-        .parallax-bg div:nth-child(2) {
-          animation-duration: 30s;
-          opacity: 0.2;
-          transform: scale(1.2);
-        }
-
-        @keyframes floatLayer {
-          0% { transform: translateY(0); }
-          100% { transform: translateY(-100px); }
-        }
-
-        /* 3D Card Container */
         .container {
           background: rgba(255, 255, 255, 0.05);
           backdrop-filter: blur(12px);
@@ -95,7 +77,6 @@ app.get("/", (req, res) => {
           to { opacity: 1; transform: translateY(0) scale(1); }
         }
 
-        /* Placeholder Logo */
         .logo {
           width: 120px;
           height: auto;
@@ -129,7 +110,6 @@ app.get("/", (req, res) => {
           min-height: 24px;
         }
 
-        /* Gradient Button with Ripple Effect */
         .button {
           position: relative;
           display: inline-block;
@@ -172,7 +152,6 @@ app.get("/", (req, res) => {
           to { transform: scale(4); opacity: 0; }
         }
 
-        /* Footer */
         .footer {
           margin-top: 20px;
           font-size: 0.9em;
@@ -194,7 +173,6 @@ app.get("/", (req, res) => {
           to { opacity: 1; }
         }
 
-        /* Theme Toggle */
         .theme-toggle {
           position: absolute;
           top: 20px;
@@ -209,9 +187,8 @@ app.get("/", (req, res) => {
           transform: rotate(180deg);
         }
 
-        /* GitHub Button */
         .github-button {
-          position: absolute;
+          position: fixed;
           top: 20px;
           left: 20px;
           width: 40px;
@@ -222,15 +199,15 @@ app.get("/", (req, res) => {
           align-items: center;
           justify-content: center;
           box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-          transition: all 0.3s ease;
+          animation: float 3s ease-in-out infinite;
           z-index: 3;
           text-decoration: none;
         }
 
         .github-button:hover {
           transform: scale(1.1);
-          background: linear-gradient(45deg, #444d56, #24292e);
-          box-shadow: 0 6px 16px rgba(0, 221, 235, 0.4);
+          background: linear-gradient(45deg, #444d56, #00ddeb);
+          box-shadow: 0 6px 16px rgba(0, 221, 235, 0.6);
         }
 
         .github-button:focus {
@@ -244,7 +221,11 @@ app.get("/", (req, res) => {
           fill: #fff;
         }
 
-        /* Dark Mode Adjustments */
+        @keyframes float {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-5px); }
+        }
+
         body.light {
           background: linear-gradient(45deg, #e0e7ff, #f3e8ff);
         }
@@ -260,7 +241,6 @@ app.get("/", (req, res) => {
           color: #1e1b4b;
         }
 
-        /* Responsive Design */
         @media (max-width: 600px) {
           .container {
             padding: 30px;
@@ -280,7 +260,6 @@ app.get("/", (req, res) => {
           }
         }
 
-        /* Accessibility */
         .container:focus {
           outline: 2px solid #00ddeb;
           outline-offset: 4px;
@@ -288,10 +267,7 @@ app.get("/", (req, res) => {
       </style>
     </head>
     <body>
-      <div class="parallax-bg">
-        <div></div>
-        <div></div>
-      </div>
+      <canvas id="particle-canvas"></canvas>
       <a class="github-button" href="https://github.com/pompomxyz/Nx-Leech-Redirect-" target="_blank" aria-label="View source code on GitHub">
         <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <path d="M12 2C6.48 2 2 6.48 2 12c0 4.42 2.87 8.17 6.84 9.49.5.09.66-.22.66-.49v-1.7c-2.78.61-3.37-1.34-3.37-1.34-.46-1.16-1.12-1.47-1.12-1.47-.91-.62.07-.61.07-.61 1.01.07 1.54 1.04 1.54 1.04.9 1.54 2.36 1.1 2.94.84.09-.65.35-1.1.64-1.35-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02A9.56 9.56 0 0112 6.8c.85.004 1.71.11 2.52.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.69-4.57 4.94.36.31.68.92.68 1.85v2.74c0 .27.16.58.67.49A10.01 10.01 0 0022 12c0-5.52-4.48-10-10-10z"/>
@@ -310,7 +286,6 @@ app.get("/", (req, res) => {
         </div>
       </div>
       <script>
-        // Theme Toggle
         const themeToggle = document.createElement('div');
         themeToggle.className = 'theme-toggle';
         themeToggle.innerHTML = '🌙';
@@ -322,7 +297,6 @@ app.get("/", (req, res) => {
           themeToggle.innerHTML = document.body.classList.contains('light') ? '🌞' : '🌙';
         });
 
-        // Load Typed.js and VanillaTilt
         const loadScripts = () => {
           const typedScript = document.createElement('script');
           typedScript.src = 'https://cdn.jsdelivr.net/npm/typed.js@2.0.12';
@@ -362,7 +336,6 @@ app.get("/", (req, res) => {
           document.head.appendChild(tiltScript);
         };
 
-        // Ripple Effect and Keyboard Navigation
         const buttonEl = document.querySelector('.button');
         buttonEl.addEventListener('click', (e) => {
           const ripple = document.createElement('span');
@@ -383,7 +356,6 @@ app.get("/", (req, res) => {
           }
         });
 
-        // GitHub Button Keyboard Navigation
         const githubButton = document.querySelector('.github-button');
         githubButton.addEventListener('keydown', (e) => {
           if (e.key === 'Enter' || e.key === ' ') {
@@ -392,14 +364,63 @@ app.get("/", (req, res) => {
           }
         });
 
-        // Initialize
+        function initParticles() {
+          const canvas = document.getElementById('particle-canvas');
+          const ctx = canvas.getContext('2d');
+          canvas.width = window.innerWidth;
+          canvas.height = window.innerHeight;
+
+          const particles = [];
+          const particleCount = 30;
+
+          for (let i = 0; i < particleCount; i++) {
+            particles.push({
+              x: Math.random() * canvas.width,
+              y: Math.random() * canvas.height,
+              radius: Math.random() * 2 + 1,
+              speedX: (Math.random() - 0.5) * 0.5,
+              speedY: (Math.random() - 0.5) * 0.5,
+              opacity: Math.random() * 0.5 + 0.3,
+            });
+          }
+
+          function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(particle => {
+              particle.x += particle.speedX;
+              particle.y += particle.speedY;
+              particle.opacity = Math.sin(Date.now() * 0.002 + particle.x) * 0.3 + 0.5;
+
+              if (particle.x < 0 || particle.x > canvas.width) particle.speedX *= -1;
+              if (particle.y < 0 || particle.y > canvas.height) particle.speedY *= -1;
+
+              ctx.beginPath();
+              ctx.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2);
+              ctx.fillStyle = `rgba(0, 221, 235, ${particle.opacity})`;
+              ctx.fill();
+            });
+            requestAnimationFrame(animate);
+          }
+
+          window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+          });
+
+          animate();
+        }
+
         loadScripts();
+        initParticles();
       </script>
     </body>
     </html>
   `);
 });
 
+//app.listen(port, () => {
+  //console.log(`Server running on port ${port}`);
+//});
 app.get("/:bot/:token", (req, res) => {
   const { bot, token } = req.params;
   const tgURL = `https://t.me/${bot}?start=${token}`;
