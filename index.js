@@ -1,7 +1,6 @@
 const express = require("express");
 const app = express();
 
-
 app.get("/", (req, res) => {
   res.send(`
     <!DOCTYPE html>
@@ -331,7 +330,7 @@ app.get("/", (req, res) => {
           typedScript.onload = () => {
             try {
               new Typed('.typed-text', {
-                strings: ['Your Telegram Bot Ecosystem', 'Built with ❤️🚀'],
+                strings: ['24/7 Free Mirror and Leech Services', 'Built with Nx Leech 🔧♨️'],
                 typeSpeed: 50,
                 backSpeed: 30,
                 backDelay: 2000,
@@ -339,11 +338,11 @@ app.get("/", (req, res) => {
                 showCursor: false,
               });
             } catch (err) {
-              document.querySelector('.typed-text').textContent = 'Your Telegram Bot Ecosystem';
+              document.querySelector('.typed-text').textContent = '24/7 Free Mirror and Leech Services';
             }
           };
           typedScript.onerror = () => {
-            document.querySelector('.typed-text').textContent = 'Your Telegram Bot Ecosystem';
+            document.querySelector('.typed-text').textContent = '24/7 Free Mirror and Leech Services';
           };
           document.head.appendChild(typedScript);
 
@@ -400,7 +399,6 @@ app.get("/", (req, res) => {
     </html>
   `);
 });
-
 
 app.get("/:bot/:token", (req, res) => {
   const { bot, token } = req.params;
